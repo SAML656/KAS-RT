@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Kas RT 01 / RW 02 Desa Sladi - Print Stylesheet for Meeting Reports
+   ========================================================================== */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    font-family: "Segoe UI", Arial, sans-serif !important;
+  }
+
+  /* Hide navigation, buttons, controls, toasts, modals */
+  .sidebar,
+  .bottom-nav,
+  .top-actions,
+  .btn,
+  .segmented-control,
+  .dropdown,
+  .btn-icon-theme,
+  .toast-container,
+  .modal-overlay,
+  .filter-wrapper,
+  .breadcrumb-trail,
+  .alert-action {
+    display: none !important;
+  }
+
+  .main-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .card {
+    border: 1px solid #cccccc !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    margin-bottom: 15px !important;
+    padding: 12px !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 10px !important;
+    margin-bottom: 15px !important;
+  }
+
+  .stat-card {
+    border: 1px solid #cccccc !important;
+    box-shadow: none !important;
+    padding: 10px !important;
+  }
+
+  .stat-value {
+    font-size: 14pt !important;
+  }
+
+  .table-container {
+    overflow: visible !important;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 10pt !important;
+  }
+
+  thead th {
+    background: #eeeeee !important;
+    color: #000000 !important;
+    border: 1px solid #cccccc !important;
+    padding: 6px 8px !important;
+  }
+
+  tbody td {
+    border: 1px solid #dddddd !important;
+    padding: 6px 8px !important;
+  }
+
+  /* Print Header Letterhead */
+  .print-letterhead {
+    display: block !important;
+    text-align: center;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+
+  .print-letterhead h2 {
+    font-size: 16pt;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .print-letterhead p {
+    font-size: 10pt;
+    margin: 3px 0 0;
+  }
+
+  /* Print Signatures Block */
+  .print-signatures {
+    display: flex !important;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 0 40px;
+    break-inside: avoid;
+  }
+
+  .print-sign-box {
+    text-align: center;
+    width: 200px;
+  }
+
+  .print-sign-space {
+    height: 60px;
+  }
+
+  .print-sign-name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
+
+.print-letterhead,
+.print-signatures {
+  display: none;
+}

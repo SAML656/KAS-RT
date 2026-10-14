@@ -1,0 +1,34 @@
+# ==========================================
+# File Sensitif & Kredensial Database (PENTING!)
+# ==========================================
+api/config.php
+.env
+.env.*
+
+# ==========================================
+# Backup, Export, dan Dump Database
+# ==========================================
+*.sql.gz
+*.bak
+dump/
+backup/
+
+# ==========================================
+# File Duplikat / File Sementara
+# ==========================================
+Pratinjau Kas RT 01_RW 02.html
+
+# ==========================================
+# File Log & Cache
+# ==========================================
+*.log
+error_log
+
+# ==========================================
+# File Sistem Operasi & Editor
+# ==========================================
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/

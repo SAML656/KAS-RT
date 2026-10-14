@@ -1,0 +1,3875 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kas RT 01/RW 02 – Pratinjau</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    :root {
+      /* Rekomendasi Utama: Soft Sage Mint (#f0f7f4: Sangat sejuk & teduh di mata, bebas silau) */
+      --bg: #f0f7f4;
+      --card: #ffffff;
+      --ink: #192523;
+      --mut: #637572;
+      --line: #d8e8e0;
+      --pri: #0b7a6b;
+      --pri2: #e3f5ec;
+      --accent: #72e4a7;
+      --in: #0d8a5b;
+      --out: #d63345;
+      --outbg: #fdebee;
+      --warn: #fef6e7;
+      --warnt: #a86200;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* Opsi Tema Pengguna: Hijau Segar Full (#72e4a7) */
+    :root[data-bg="vivid"] {
+      --bg: #72e4a7;
+      --card: #ffffff;
+      --ink: #0c3327;
+      --mut: #295e4e;
+      --line: #49c58b;
+      --pri: #055a4e;
+      --pri2: #a2f2c8;
+      --accent: #0b7a6b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]):not([data-bg="vivid"]) {
+        --bg: #111a19;
+        --card: #182422;
+        --ink: #eaf1ef;
+        --mut: #93a5a2;
+        --line: #273734;
+        --pri: #35bda5;
+        --pri2: #163631;
+        --in: #34d399;
+        --out: #f87171;
+        --outbg: #42141a;
+        --warn: #3d2a04;
+        --warnt: #fbbf24;
+      }
+    }
+
+    :root[data-theme="dark"]:not([data-bg="vivid"]) {
+      --bg: #111a19;
+      --card: #182422;
+      --ink: #eaf1ef;
+      --mut: #93a5a2;
+      --line: #273734;
+      --pri: #35bda5;
+      --pri2: #163631;
+      --in: #34d399;
+      --out: #f87171;
+      --outbg: #42141a;
+      --warn: #3d2a04;
+      --warnt: #fbbf24;
+    }
+
+    .file-rekap-card:hover {
+      border-color: var(--pri) !important;
+      box-shadow: 0 4px 14px rgba(11, 122, 107, 0.08);
+      transform: translateY(-1px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+
+    aside {
+      background: var(--card);
+      border-right: 1px solid var(--line);
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--pri);
+      color: #ffffff;
+    }
+
+    .brand small {
+      display: block;
+      font-weight: 400;
+      color: var(--mut);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 44px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 0;
+      background: none;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .nav:hover {
+      background: var(--pri2);
+      color: var(--pri);
+    }
+
+    .nav.on {
+      background: var(--pri);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .nav span.i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Clean Minimalist Line SVG Icons */
+    .i-svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .side-foot {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--mut);
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    main {
+      padding: 24px 32px 60px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .top h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .top p {
+      margin: 3px 0 0;
+      color: var(--mut);
+      font-size: 13.5px;
+    }
+
+    .sp {
+      flex: 1;
+    }
+
+    .seg {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .seg button {
+      min-height: 40px;
+      padding: 0 16px;
+      border: 0;
+      background: transparent;
+      color: var(--mut);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .seg button.on {
+      background: var(--pri);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .btn {
+      min-height: 40px;
+      padding: 0 16px;
+      border-radius: 8px;
+      border: 1px solid var(--pri);
+      background: var(--pri);
+      color: #ffffff;
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      opacity: 0.92;
+    }
+
+    .btn.ghost {
+      background: var(--card);
+      color: var(--pri);
+      border-color: var(--line);
+    }
+
+    .btn.ghost:hover {
+      background: var(--pri2);
+      border-color: var(--pri);
+    }
+
+    .btn.sm {
+      min-height: 32px;
+      padding: 0 10px;
+      font-size: 12.5px;
+      border-radius: 6px;
+    }
+
+    .btn.danger {
+      background: var(--card);
+      color: var(--out);
+      border-color: var(--out);
+    }
+
+    .btn.danger:hover {
+      background: var(--outbg);
+    }
+
+    .menu {
+      position: relative;
+    }
+
+    .drop {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 46px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      min-width: 220px;
+      padding: 6px;
+      z-index: 20;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .drop.show {
+      display: block;
+    }
+
+    .drop button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      text-align: left;
+      min-height: 38px;
+      border: 0;
+      background: none;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      padding: 0 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .drop button:hover {
+      background: var(--pri2);
+      color: var(--pri);
+    }
+
+    .drop hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 4px 0;
+    }
+
+    .drop em {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mut);
+      padding: 6px 12px 2px;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .b-in {
+      background: var(--pri2);
+      color: var(--in);
+    }
+
+    .b-out {
+      background: var(--outbg);
+      color: var(--out);
+    }
+
+    .b-w {
+      background: var(--warn);
+      color: var(--warnt);
+    }
+
+    .b-n {
+      background: var(--line);
+      color: var(--mut);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .stat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-ic {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--pri2);
+      color: var(--pri);
+    }
+
+    .stat-ic.in {
+      background: var(--pri2);
+      color: var(--in);
+    }
+
+    .stat-ic.out {
+      background: var(--outbg);
+      color: var(--out);
+    }
+
+    .stat small {
+      color: var(--mut);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-top: 6px;
+    }
+
+    .in {
+      color: var(--in);
+    }
+
+    .out {
+      color: var(--out);
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .bar {
+      display: grid;
+      grid-template-columns: 140px 1fr 100px;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0;
+      font-size: 13.5px;
+    }
+
+    .track {
+      height: 8px;
+      background: var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .track i {
+      display: block;
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      color: var(--mut);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+
+    .r {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .tabs button {
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tabs button.on {
+      background: var(--pri);
+      color: #ffffff;
+      border-color: var(--pri);
+      font-weight: 600;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    input, select {
+      min-height: 40px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--pri);
+    }
+
+    .sumbar {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      background: var(--pri2);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+
+    .crumb {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: var(--mut);
+    }
+
+    .crumb a {
+      color: var(--pri);
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .crumb a:hover {
+      text-decoration: underline;
+    }
+
+    .explorer {
+      display: grid;
+      grid-template-columns: 260px 1fr 240px;
+      gap: 14px;
+    }
+
+    .tree {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px;
+    }
+
+    .tree-folder-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tree-folder-row {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border-radius: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .tree-folder-row:hover, .tree-folder-row.on {
+      background: var(--pri2);
+      color: var(--pri);
+      font-weight: 600;
+    }
+
+    .tree-toggle-btn {
+      width: 26px;
+      height: 36px;
+      border: 0;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mut);
+      cursor: pointer;
+      font-size: 10px;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .tree-folder-btn {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+      min-height: 36px;
+      align-items: center;
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      font-size: 13px;
+      padding: 0 8px 0 0;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .tree-sub-files {
+      border-left: 2px solid var(--line);
+      margin-left: 12px;
+      padding-left: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 2px;
+      margin-bottom: 6px;
+    }
+
+    .tree-file-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      width: 100%;
+      min-height: 32px;
+      border: 0;
+      background: none;
+      color: var(--ink);
+      font: inherit;
+      font-size: 12px;
+      padding: 4px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s ease;
+    }
+
+    .tree-file-btn:hover {
+      background: var(--pri2);
+      color: var(--pri);
+    }
+
+    .tree-file-btn.on {
+      background: var(--pri);
+      color: #ffffff !important;
+      font-weight: 600;
+    }
+
+    .tree-file-btn.on small {
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .tree-file-btn.on .badge {
+      background: rgba(255, 255, 255, 0.25) !important;
+      color: #ffffff !important;
+    }
+
+    .folders {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .fold {
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .fold:hover {
+      border-color: var(--pri);
+      transform: translateY(-2px);
+    }
+
+    .fold-ic {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--pri2);
+      color: var(--pri);
+      margin-bottom: 10px;
+    }
+
+    .fold b {
+      display: block;
+      font-size: 14px;
+    }
+
+    .fold small {
+      color: var(--mut);
+      font-size: 12.5px;
+    }
+
+    .file {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      background: var(--card);
+      transition: border-color 0.15s ease;
+    }
+
+    .file:hover, .file.on {
+      border-color: var(--pri);
+    }
+
+    .file .ic {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--surface-alt, #f0f4f3);
+      color: var(--pri);
+    }
+
+    .file small {
+      color: var(--mut);
+      display: block;
+      font-size: 12px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 80px;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: var(--bg);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    .alert {
+      background: var(--pri2);
+      color: var(--pri);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert.warn {
+      background: var(--warn);
+      color: var(--warnt);
+    }
+
+    .chat {
+      border-left: 3px solid var(--pri);
+      background: var(--pri2);
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 13.5px;
+    }
+
+    /* Modals Overlay & Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 26, 25, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 200;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 440px;
+      padding: 24px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+      animation: modalPop 0.2s ease-out;
+    }
+
+    .modal-card.modal-lg {
+      max-width: 950px;
+      width: 96%;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      padding: 22px 24px;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Spreadsheet Table Input Styles */
+    #spGridTable input, #spGridTable select {
+      width: 100%;
+      min-height: 34px;
+      height: 34px;
+      padding: 0 8px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+    }
+
+    #spGridTable input:focus, #spGridTable select:focus {
+      border-color: var(--pri);
+    }
+
+    #spGridTable td {
+      padding: 5px 6px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .bottom {
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        display: none;
+      }
+      main {
+        padding: 16px 16px 90px;
+      }
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      .grid2, .explorer {
+        grid-template-columns: 1fr;
+      }
+      .tree, .det {
+        display: none;
+      }
+      .bottom {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--card);
+        border-top: 1px solid var(--line);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        z-index: 30;
+      }
+      .bottom button {
+        min-height: 56px;
+        border: 0;
+        background: none;
+        color: var(--mut);
+        font: inherit;
+        font-size: 11px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+      .bottom button.on {
+        color: var(--pri);
+        font-weight: 600;
+      }
+      .bottom .i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      table.resp thead {
+        display: none;
+      }
+      table.resp tr {
+        display: block;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin-bottom: 8px;
+        padding: 10px;
+        background: var(--card);
+      }
+      table.resp td {
+        display: block;
+        border: 0;
+        padding: 3px 0;
+      }
+      table.resp td.r {
+        text-align: left;
+        font-weight: 600;
+      }
+      .bar {
+        grid-template-columns: 100px 1fr 80px;
+      }
+      .top h1 {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <aside id="side"></aside>
+    <main>
+      <div class="top">
+        <div>
+          <h1 id="ttl"></h1>
+          <p id="sub"></p>
+        </div>
+        <div class="sp"></div>
+        <div class="seg" id="mode">
+          <button data-m="w" class="on">
+            <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Warga
+          </button>
+          <button data-m="a">
+            <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Admin
+          </button>
+        </div>
+        <!-- Tombol Pilihan Suasana Warna Background -->
+        <button class="btn ghost sm" id="themeToggleBtn" onclick="toggleBgTheme()" title="Pilih Suasana Warna: Teduh Nyaman di Mata atau Hijau Segar (#72e4a7)" style="display:flex;align-items:center;gap:5px;font-size:12.5px;padding:5px 10px;">
+          <span id="themeToggleIcon">🌿</span>
+          <span id="themeToggleLabel">Tema</span>
+        </button>
+
+        <div class="menu">
+          <button class="btn" id="exp">
+            <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Ekspor ▾
+          </button>
+          <div class="drop" id="drop"></div>
+        </div>
+      </div>
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <nav class="bottom" id="bot"></nav>
+  <div class="toast" id="toast"></div>
+
+  <!-- Admin Authentication Modal -->
+  <div id="authModal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <h3 style="margin:0;font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px;">
+          <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri);width:20px;height:20px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span id="authTitle">Autentikasi Pengurus RT</span>
+        </h3>
+        <button onclick="closeAuthModal()" style="border:0;background:none;font-size:22px;color:var(--mut);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+      <p id="authDesc" style="color:var(--mut);font-size:13.5px;margin:0 0 16px;line-height:1.5;"></p>
+      <form id="authForm" onsubmit="handleAuthSubmit(event)">
+        <div id="authRowEmail" style="margin-bottom:12px;">
+          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Email Pengurus</label>
+          <input type="email" id="authEmail" placeholder="Masukkan email pengurus RT..." autocomplete="username" style="width:100%;">
+        </div>
+        <div id="authRowCode" style="margin-bottom:12px;display:none;">
+          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Kode Pemulihan</label>
+          <input type="text" id="authCode" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" style="width:100%;text-transform:uppercase;">
+        </div>
+        <div id="authRowCurrent" style="margin-bottom:12px;display:none;">
+          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Password Saat Ini</label>
+          <input type="password" id="authCurrent" autocomplete="current-password" style="width:100%;">
+        </div>
+        <div id="authRowPass" style="margin-bottom:12px;">
+          <label id="authPassLabel" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Password</label>
+          <input type="password" id="authPass" autocomplete="current-password" style="width:100%;">
+        </div>
+        <div id="authRowPass2" style="margin-bottom:12px;display:none;">
+          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Ulangi Password Baru</label>
+          <input type="password" id="authPass2" autocomplete="new-password" style="width:100%;">
+          <small style="color:var(--mut);font-size:12px;display:block;margin-top:4px;">Minimal 8 karakter.</small>
+        </div>
+        <div id="authError" style="display:none;background:var(--outbg);color:var(--out);border:1px solid var(--out);padding:8px 12px;border-radius:6px;font-size:12.5px;margin-bottom:14px;"></div>
+        <div id="authRecovery" style="display:none;background:var(--pri2);border:1px dashed var(--pri);padding:12px;border-radius:8px;margin-bottom:14px;font-size:13px;line-height:1.5;">
+          <b>Simpan Kode Pemulihan Anda</b><br>
+          <span style="font-family:monospace;font-size:17px;font-weight:700;letter-spacing:1px;" id="authRecoveryCode"></span><br>
+          <small style="color:var(--mut);">Kode ini hanya tampil sekali. Gunakan untuk reset bila lupa password.</small>
+        </div>
+        <div id="authLinks" style="font-size:12.5px;margin-bottom:14px;display:flex;gap:14px;flex-wrap:wrap;"></div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;">
+          <button type="button" id="authCancel" class="btn ghost sm" onclick="closeAuthModal()">Batal</button>
+          <button type="submit" id="authSubmit" class="btn sm">Masuk</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Panduan Web (Warga & Admin) -->
+  <div id="guideModal" class="modal-overlay" onclick="if(event.target===this)closeGuide()">
+    <div class="modal-card modal-lg" style="max-height:88vh;display:flex;flex-direction:column;">
+      <style>
+        .gd-tabs{display:flex;gap:6px;margin-bottom:12px;border-bottom:1px solid var(--line);}
+        .gd-tabs button{border:0;background:none;padding:8px 14px;font:inherit;font-size:13.5px;font-weight:600;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+        .gd-tabs button.on{color:var(--pri);border-bottom-color:var(--pri);}
+        .gd-body{overflow-y:auto;padding-right:4px;}
+        .gd-sec{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:var(--card);}
+        .gd-sec summary{cursor:pointer;padding:11px 14px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;list-style:none;}
+        .gd-sec summary::-webkit-details-marker{display:none;}
+        .gd-sec summary::after{content:'\25BE';margin-left:auto;color:var(--mut);transition:transform .15s;}
+        .gd-sec[open] summary::after{transform:rotate(180deg);}
+        .gd-sec[open] summary{border-bottom:1px solid var(--line);}
+        .gd-sec .gd-in{padding:10px 16px 12px;font-size:13.5px;line-height:1.6;}
+        .gd-sec ol,.gd-sec ul{margin:6px 0 0;padding-left:20px;}
+        .gd-sec li{margin-bottom:4px;}
+        .gd-tip{background:var(--pri2);border-radius:8px;padding:8px 12px;margin-top:8px;font-size:12.5px;}
+        .gd-intro{background:var(--pri2);border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.55;margin-bottom:12px;}
+      </style>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h3 style="margin:0;font-size:18px;font-weight:700;">📖 Panduan Kas RT 01 / RW 02</h3>
+        <button onclick="closeGuide()" style="border:0;background:none;font-size:22px;color:var(--mut);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+      <div class="gd-tabs">
+        <button id="gdTabWarga" class="on" onclick="showGuideTab('warga')">👥 Untuk Warga</button>
+        <button id="gdTabAdmin" onclick="showGuideTab('admin')">🛡️ Untuk Admin (Pengurus)</button>
+      </div>
+
+      <div class="gd-body">
+        <!-- ===== PANDUAN WARGA ===== -->
+        <div id="gdWarga">
+          <div class="gd-intro">Aplikasi ini membuat keuangan kas RT <b>transparan</b>. Warga bisa melihat uang masuk &amp; keluar, mengunduh laporan, dan menyampaikan usulan <b>tanpa perlu login</b>.</div>
+
+          <details class="gd-sec" open><summary>🏠 1. Beranda &ndash; ringkasan kas</summary><div class="gd-in">
+            Menampilkan <b>saldo kas</b>, total uang masuk, total uang keluar, pengeluaran per kegiatan, dan transaksi terbaru.
+            <ul><li>Klik tab <b>Beranda</b> di menu kiri (atau menu bawah di HP).</li><li>Angka merah = uang keluar, hijau = uang masuk.</li></ul>
+          </div></details>
+
+          <details class="gd-sec"><summary>📒 2. Buku Kas &ndash; semua transaksi</summary><div class="gd-in">
+            Daftar lengkap seluruh transaksi kas RT.
+            <ol><li>Buka tab <b>Buku Kas</b>.</li><li>Gunakan kolom pencarian untuk mencari uraian atau nama pihak.</li><li>Pakai filter jenis (masuk/keluar) atau kegiatan untuk mempersempit daftar.</li></ol>
+            <div class="gd-tip">Warga hanya dapat melihat. Tombol tambah, ubah, dan hapus transaksi hanya muncul untuk admin.</div>
+          </div></details>
+
+          <details class="gd-sec"><summary>🗂️ 3. Arsip &ndash; folder &amp; berkas rekap</summary><div class="gd-in">
+            Laporan dikelompokkan seperti folder di komputer: <b>Iuran Warga, Operasional RT, Kebersihan &amp; Keamanan, Pembangunan, Sosial, Liburan, Karnaval</b>.
+            <ol>
+              <li>Buka tab <b>Arsip</b>.</li>
+              <li>Klik panah &#9654; di panel kiri untuk membuka folder, lalu klik berkas rekap berdasarkan periode (mis. &quot;Oktober 2026&quot;).</li>
+              <li>Berkas terbaru selalu berada di paling atas. Lencana <b>Draf</b> = masih berjalan, <b>Final</b> = sudah disahkan/dikunci.</li>
+            </ol>
+          </div></details>
+
+          <details class="gd-sec"><summary>⬇️ 4. Mengunduh laporan (Excel)</summary><div class="gd-in">
+            <ul>
+              <li><b>Per berkas:</b> klik tombol <b>Unduh .xlsx</b> pada berkas yang diinginkan (di daftar berkas atau di dalam berkas).</li>
+              <li>Berkas yang sudah diunduh ditandai <b>✓ Terunduh</b> agar Anda tahu mana yang sudah dimiliki.</li>
+              <li><b>Semua kegiatan:</b> menu <b>Ekspor</b> di kanan atas &rarr; <i>Rekap Semua Kegiatan</i> (ringkasan) atau <i>Seluruh Buku Kas</i> (semua transaksi).</li>
+              <li><b>Cetak / PDF:</b> menu <b>Ekspor</b> &rarr; <i>Cetak Laporan / PDF</i>, lalu pilih &quot;Simpan sebagai PDF&quot;.</li>
+            </ul>
+          </div></details>
+
+          <details class="gd-sec"><summary>💬 5. Usulan &ndash; sampaikan aspirasi</summary><div class="gd-in">
+            <ol>
+              <li>Buka tab <b>Usulan</b>, klik <b>Sampaikan Usulan</b>.</li>
+              <li>Isi judul usulan, nama Anda, dan rincian, lalu kirim.</li>
+              <li>Pantau status: <b>Sedang Ditinjau</b> &rarr; <b>Telah Dianggarkan</b> atau <b>Ditolak</b>, beserta tanggapan resmi pengurus RT di bawah usulan.</li>
+            </ol>
+            <div class="gd-tip">Usulan terlihat oleh semua warga. Jangan menulis data pribadi sensitif (nomor HP, NIK, dll).</div>
+          </div></details>
+
+          <details class="gd-sec"><summary>🎨 6. Tema &amp; tampilan</summary><div class="gd-in">
+            Tombol <b>Tema</b> di kanan atas mengganti suasana warna: <b>Teduh</b> (nyaman di mata) atau <b>Hijau Segar</b>. Pilihan tersimpan di browser Anda. Aplikasi juga dapat dipakai di HP.
+          </div></details>
+
+          <details class="gd-sec"><summary>❓ 7. Pertanyaan umum</summary><div class="gd-in">
+            <ul>
+              <li><b>Data kosong?</b> Berarti pengurus belum mencatat transaksi.</li>
+              <li><b>Angka tidak cocok?</b> Hubungi pengurus melalui menu Usulan.</li>
+              <li><b>File Excel tidak terbuka?</b> Buka dengan Microsoft Excel, LibreOffice, atau Google Sheets.</li>
+            </ul>
+          </div></details>
+        </div>
+
+        <!-- ===== PANDUAN ADMIN ===== -->
+        <div id="gdAdmin" style="display:none;">
+          <div class="gd-intro">Mode <b>Admin</b> khusus pengurus RT (ketua, bendahara, sekretaris) untuk mencatat kas, mengelola berkas rekap, dan menanggapi usulan. Semua data tersimpan di <b>database</b> sehingga aman dan dapat dilihat semua warga.</div>
+
+          <details class="gd-sec" open><summary>🔐 1. Masuk, buat password &amp; reset</summary><div class="gd-in">
+            <b>Pertama kali:</b>
+            <ol>
+              <li>Klik tombol <b>Admin</b> pada pilihan <b>Warga | Admin</b> di kanan atas. Pertama kali, pilih <b>&quot;Belum punya password? Buat&quot;</b>.</li>
+              <li>Isi email pengurus yang terdaftar, buat password (min. 8 karakter), ulangi, lalu simpan.</li>
+              <li><b>Catat Kode Pemulihan</b> yang muncul. Kode hanya tampil sekali.</li>
+            </ol>
+            <b>Berikutnya:</b> masuk dengan email + password.
+            <ul>
+              <li><b>Ganti password:</b> tombol <i>Ganti Password</i> di sidebar kiri bawah (saat mode admin aktif).</li>
+              <li><b>Lupa password:</b> klik <i>Lupa password?</i>, isi email + kode pemulihan + password baru. Anda akan mendapat kode pemulihan baru.</li>
+              <li><b>Keluar:</b> tombol <i>Keluar Admin</i> di sidebar. Selalu keluar bila memakai perangkat bersama.</li>
+            </ul>
+            <div class="gd-tip">Hanya email pengurus yang terdaftar di database yang bisa masuk. Jangan bagikan password atau kode pemulihan.</div>
+          </div></details>
+
+          <details class="gd-sec"><summary>📝 2. Mencatat transaksi kas</summary><div class="gd-in">
+            <ol>
+              <li>Buka <b>Buku Kas</b> &rarr; klik tombol catat/tambah transaksi, atau pakai <b>Input Spreadsheet</b> untuk banyak baris sekaligus.</li>
+              <li>Pilih <b>kegiatan/folder</b> dan <b>berkas rekap</b> tujuan (opsional), isi tanggal, jenis (Masuk/Keluar), uraian, nominal, dan pihak/warga.</li>
+              <li>Simpan. Data langsung masuk database dan tampil ke semua warga.</li>
+              <li>Transaksi salah? Hapus lewat ikon hapus pada baris transaksi.</li>
+            </ol>
+            <div class="gd-tip">Berkas berstatus <b>Final</b> terkunci &ndash; transaksi tidak bisa ditambah. Buka kunci dulu bila perlu koreksi.</div>
+          </div></details>
+
+          <details class="gd-sec"><summary>🗂️ 3. Membuat &amp; mengelola berkas rekap (Arsip)</summary><div class="gd-in">
+            <ol>
+              <li>Buka <b>Arsip</b> &rarr; pilih folder kegiatan &rarr; klik <b>+ Rekap Baru</b> / <b>Buat Berkas Rekap Baru</b>.</li>
+              <li>Isi judul (mis. &quot;Rekap Iuran Warga &ndash; November 2026&quot;), periode, status, dan deskripsi.</li>
+              <li>Buka berkas untuk mengisi transaksi. Setelah laporan selesai dan diperiksa, klik <b>🔒 Kunci Final</b>.</li>
+              <li>Perlu koreksi? Klik <b>🔓 Buka Kunci Draf</b>.</li>
+              <li>Berkas salah/uji coba: klik <b>Hapus Berkas</b> (transaksi di dalamnya ikut terhapus &ndash; tidak bisa dibatalkan).</li>
+            </ol>
+            <div class="gd-tip">Satu berkas per periode (bulanan) menjaga arsip rapi. Daftar otomatis terurut dari yang terbaru.</div>
+          </div></details>
+
+          <details class="gd-sec"><summary>⬆️ 4. Impor data dari Excel (.xlsx)</summary><div class="gd-in">
+            <ol>
+              <li>Buka berkas rekap tujuan &rarr; klik <b>Impor XLSX</b>.</li>
+              <li>Pilih file Excel dengan kolom: <b>Tanggal, Jenis (Masuk/Keluar), Keterangan, Nominal, Pihak</b>. Tanggal format <code>2026-10-05</code> atau <code>05/10/2026</code>; nominal berupa angka tanpa titik/koma.</li>
+              <li>Periksa pratinjau, lalu klik <b>Simpan Transaksi</b>.</li>
+            </ol>
+          </div></details>
+
+          <details class="gd-sec"><summary>⬇️ 5. Mengunduh &amp; mencetak laporan</summary><div class="gd-in">
+            Sama seperti warga: unduh per berkas lewat <b>Unduh .xlsx</b> (ditandai ✓ Terunduh), atau menu <b>Ekspor</b> untuk Rekap Semua Kegiatan, Seluruh Buku Kas, dan Cetak/PDF siap rapat.
+          </div></details>
+
+          <details class="gd-sec"><summary>💬 6. Menanggapi usulan warga</summary><div class="gd-in">
+            <ol>
+              <li>Buka <b>Usulan</b>.</li>
+              <li>Ubah <b>Status</b>: Sedang Ditinjau, Telah Dianggarkan, atau Ditolak.</li>
+              <li>Tulis tanggapan resmi hasil musyawarah, lalu klik <b>Simpan Tanggapan</b>.</li>
+              <li>Usulan tidak pantas atau spam dapat dihapus dengan tombol <b>Hapus</b>.</li>
+            </ol>
+          </div></details>
+
+          <details class="gd-sec"><summary>⚙️ 7. Tips &amp; keamanan data</summary><div class="gd-in">
+            <ul>
+              <li>Data tersimpan di database MySQL; lakukan <b>backup berkala</b> (ekspor database lewat phpMyAdmin).</li>
+              <li>Pastikan MySQL &amp; server aplikasi aktif saat dipakai.</li>
+              <li>Gunakan password yang kuat dan simpan kode pemulihan di tempat aman.</li>
+              <li>Cek kembali nominal sebelum mengunci berkas menjadi <b>Final</b>.</li>
+            </ul>
+          </div></details>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:12px;">
+        <button class="btn sm" onclick="closeGuide()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spreadsheet Batch Input Modal -->
+  <div id="spreadsheetModal" class="modal-overlay">
+    <div class="modal-card modal-lg">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div>
+          <h3 style="margin:0;font-size:17.5px;font-weight:700;display:flex;align-items:center;gap:8px;">
+            <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri);width:20px;height:20px;"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            Input Transaksi Cepat (Mode Spreadsheet)
+          </h3>
+          <p style="color:var(--mut);font-size:13px;margin:3px 0 0;">
+            Pilih kegiatan sekali, lalu masukkan banyak transaksi secara beruntun tanpa upload satu-satu.
+          </p>
+        </div>
+        <button onclick="closeSpreadsheetModal()" style="border:0;background:none;font-size:24px;color:var(--mut);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+
+      <!-- Activity & Defaults Header Bar -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:12px;background:var(--pri2);padding:12px 14px;border-radius:10px;margin-bottom:14px;">
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;color:var(--ink);">Kegiatan / Folder:</label>
+          <select id="spFolderSelect" style="width:100%;height:36px;font-size:13px;background:var(--card);" onchange="updateSpCatatanDropdown(this.value)">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;color:var(--ink);">Berkas Rekap Target:</label>
+          <select id="spCatatanSelect" style="width:100%;height:36px;font-size:13px;background:var(--card);">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;color:var(--ink);">Tanggal Bawaan:</label>
+          <input type="date" id="spDefaultDate" style="width:100%;height:36px;font-size:13px;background:var(--card);" onchange="applyDefaultDateToRows(this.value)">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;color:var(--ink);">Jenis Arus Kas Bawaan:</label>
+          <select id="spDefaultType" style="width:100%;height:36px;font-size:13px;background:var(--card);" onchange="applyDefaultTypeToRows(this.value)">
+            <option value="i">📈 Uang Masuk (Penerimaan)</option>
+            <option value="o">📉 Uang Keluar (Pengeluaran)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Quick Excel Paste toggle -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:13px;font-weight:700;color:var(--ink);">Daftar Baris Input:</span>
+        <button type="button" class="btn ghost sm" onclick="toggleExcelPasteBox()">
+          <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+          Tempel dari Excel / Teks
+        </button>
+      </div>
+
+      <!-- Excel Paste Collapsible Box -->
+      <div id="excelPasteBox" style="display:none;background:var(--card);border:1px dashed var(--pri);border-radius:8px;padding:12px;margin-bottom:12px;">
+        <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:var(--pri);">Salin beberapa baris dari Excel/Sheets dan tempel di sini (Kolom: Keterangan - Nominal - Pihak):</label>
+        <textarea id="excelPasteArea" placeholder="Contoh:&#10;Iuran Bpk Joko RT 01&#9;30000&#9;Joko (Blok A-1)&#10;Iuran Ibu Maya RT 01&#9;30000&#9;Maya (Blok A-2)" style="width:100%;height:70px;font-size:12px;font-family:monospace;padding:8px;border:1px solid var(--line);border-radius:6px;outline:none;"></textarea>
+        <div style="display:flex;justify-content:flex-end;gap:6px;margin-top:6px;">
+          <button type="button" class="btn ghost sm" onclick="toggleExcelPasteBox()">Batal</button>
+          <button type="button" class="btn sm" onclick="parseAndAppendExcelPaste()">Masukkan ke Tabel</button>
+        </div>
+      </div>
+
+      <!-- Table Container -->
+      <div style="flex:1;min-height:200px;max-height:360px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;margin-bottom:12px;background:var(--card);">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;" id="spGridTable">
+          <thead style="position:sticky;top:0;background:var(--bg);z-index:2;">
+            <tr>
+              <th style="width:36px;text-align:center;padding:8px 4px;">#</th>
+              <th style="width:130px;padding:8px;">Tanggal</th>
+              <th style="width:100px;padding:8px;">Jenis</th>
+              <th style="padding:8px;">Uraian / Keterangan Transaksi</th>
+              <th style="width:135px;padding:8px;text-align:right;">Nominal (Rp)</th>
+              <th style="width:150px;padding:8px;">Pihak / Warga</th>
+              <th style="width:36px;text-align:center;padding:8px 4px;"></th>
+            </tr>
+          </thead>
+          <tbody id="spTableBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Row Controls and Summary -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn ghost sm" onclick="addSpRows(1)">+ 1 Baris</button>
+          <button type="button" class="btn ghost sm" onclick="addSpRows(5)">+ 5 Baris</button>
+          <button type="button" class="btn ghost sm" onclick="clearEmptySpRows()" style="color:var(--mut);">Hapus Baris Kosong</button>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;font-size:13px;background:var(--card);border:1px solid var(--line);padding:5px 12px;border-radius:6px;">
+          <span>Baris: <b id="spCount">0</b></span>
+          <span>Masuk: <b class="in" id="spTotalMasuk">Rp 0</b></span>
+          <span>Keluar: <b class="out" id="spTotalKeluar">Rp 0</b></span>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;border-top:1px solid var(--line);padding-top:14px;">
+        <button type="button" class="btn ghost sm" onclick="closeSpreadsheetModal()">Batal</button>
+        <button type="button" class="btn sm" onclick="saveSpreadsheetBatch()" id="btnSaveBatch">
+          💾 Simpan Semua Transaksi
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Import XLSX Modal -->
+  <div id="importXlsxModal" class="modal-overlay">
+    <div class="modal-card modal-lg">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div>
+          <h3 style="margin:0;font-size:17.5px;font-weight:700;display:flex;align-items:center;gap:8px;">
+            <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri);width:20px;height:20px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Impor Data Laporan Kegiatan (.xlsx)
+          </h3>
+          <p style="color:var(--mut);font-size:13px;margin:3px 0 0;">
+            Unggah berkas Excel (.xlsx) untuk memasukkan data kas kegiatan sekaligus.
+          </p>
+        </div>
+        <button onclick="closeImportXlsxModal()" style="border:0;background:none;font-size:24px;color:var(--mut);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+
+      <div style="background:var(--pri2);padding:12px 14px;border-radius:10px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div>
+          <span style="font-size:12px;font-weight:700;color:var(--ink);display:block;">Target Kegiatan / Folder:</span>
+          <b id="importTargetFolderName" style="font-size:14px;color:var(--pri);">-</b>
+        </div>
+        <button type="button" class="btn ghost sm" onclick="downloadFolderXLSXTemplate(importTargetFolderId)">
+          <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Unduh Template XLSX Kosong
+        </button>
+      </div>
+
+      <!-- File upload dropzone -->
+      <div style="border:2px dashed var(--line);border-radius:10px;padding:22px 16px;text-align:center;background:var(--card);margin-bottom:14px;cursor:pointer;transition:border-color 0.2s;" onclick="document.getElementById('xlsxFileInput').click()" ondragover="event.preventDefault()" ondrop="handleXlsxFileDrop(event)">
+        <input type="file" id="xlsxFileInput" accept=".xlsx,.xls" style="display:none;" onchange="handleXlsxFileSelected(event)">
+        <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:36px;height:36px;color:var(--pri);margin-bottom:8px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="12"></line><line x1="15" y1="15" x2="12" y2="12"></line></svg>
+        <div style="font-size:13.5px;font-weight:600;margin-bottom:4px;" id="xlsxUploadLabel">Klik untuk memilih file Excel (.xlsx) atau seret ke sini</div>
+        <div style="font-size:12px;color:var(--mut);">Mendukung format .xlsx dan .xls (Kolom: Tanggal, Jenis, Keterangan, Nominal, Pihak)</div>
+      </div>
+
+      <!-- Live Preview Table Container -->
+      <div id="importPreviewContainer" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-size:13px;font-weight:700;">Pratinjau Baris Terdeteksi:</span>
+          <div style="display:flex;gap:12px;font-size:12.5px;">
+            <span>Total: <b id="impPrevCount">0</b></span>
+            <span>Masuk: <b class="in" id="impPrevMasuk">Rp 0</b></span>
+            <span>Keluar: <b class="out" id="impPrevKeluar">Rp 0</b></span>
+          </div>
+        </div>
+        <div style="max-height:240px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;margin-bottom:12px;background:var(--card);">
+          <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+            <thead style="position:sticky;top:0;background:var(--bg);z-index:2;border-bottom:1px solid var(--line);">
+              <tr>
+                <th style="padding:6px 8px;width:30px;text-align:center;">#</th>
+                <th style="padding:6px 8px;width:100px;">Tanggal</th>
+                <th style="padding:6px 8px;width:80px;">Jenis</th>
+                <th style="padding:6px 8px;">Keterangan Transaksi</th>
+                <th style="padding:6px 8px;width:115px;text-align:right;">Nominal (Rp)</th>
+                <th style="padding:6px 8px;width:130px;">Pihak / Warga</th>
+              </tr>
+            </thead>
+            <tbody id="impPrevBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div id="importXlsxError" style="display:none;background:var(--outbg);color:var(--out);border:1px solid var(--out);padding:8px 12px;border-radius:6px;font-size:12.5px;margin-bottom:14px;"></div>
+
+      <!-- Footer -->
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;border-top:1px solid var(--line);padding-top:14px;">
+        <button type="button" class="btn ghost sm" onclick="closeImportXlsxModal()">Batal</button>
+        <button type="button" class="btn sm" id="btnConfirmImportXlsx" onclick="confirmImportXlsx()" disabled>
+          💾 Simpan Transaksi ke Kegiatan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Buat Berkas Rekap Baru (File Explorer) -->
+  <div id="newRekapModal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <h3 style="margin:0;font-size:17.5px;font-weight:700;display:flex;align-items:center;gap:8px;">
+          <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri);width:20px;height:20px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="12"></line><line x1="15" y1="15" x2="12" y2="12"></line></svg>
+          Buat Berkas Rekap Baru
+        </h3>
+        <button onclick="closeNewRekapModal()" style="border:0;background:none;font-size:24px;color:var(--mut);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+      <p style="color:var(--mut);font-size:13px;margin:0 0 14px;line-height:1.5;">
+        Kelompokkan data kas ke dalam berkas riwayat baru agar transaksi tersusun rapi berdasarkan tanggal atau bulan rekapan.
+      </p>
+      <form onsubmit="handleNewRekapSubmit(event)">
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Folder / Kegiatan:</label>
+          <select id="nrFolder" style="width:100%;height:36px;font-size:13px;" required></select>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Nama Berkas Rekap (Berdasarkan Tanggal / Bulan):</label>
+          <input type="text" id="nrTitle" placeholder="Contoh: Rekap Kas November 2026" style="width:100%;height:36px;font-size:13px;" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Rentang Periode Tanggal:</label>
+            <input type="text" id="nrPeriod" placeholder="Contoh: 01/11/2026 - 30/11/2026" style="width:100%;height:36px;font-size:13px;">
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Status Berkas:</label>
+            <select id="nrStatus" style="width:100%;height:36px;font-size:13px;">
+              <option value="Draf">✎ Draf (Dapat Diedit)</option>
+              <option value="Final">🔒 Final (Disahkan)</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Keterangan Tambahan:</label>
+          <textarea id="nrDesc" rows="2" placeholder="Catatan rekap atau rincian kegiatan..." style="width:100%;padding:8px;font-size:13px;border:1px solid var(--line);border-radius:6px;outline:none;"></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;">
+          <button type="button" class="btn ghost sm" onclick="closeNewRekapModal()">Batal</button>
+          <button type="submit" class="btn sm">💾 Simpan Berkas Rekap</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Tambah/Edit Folder Kegiatan RT -->
+  <div id="folderModal" class="modal-overlay" onclick="if(event.target===this)closeFolderModal()">
+    <div class="modal-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <h3 id="folderModalTitle" style="margin:0;font-size:17.5px;font-weight:700;display:flex;align-items:center;gap:8px;">
+          <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pri);width:20px;height:20px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          <span id="folderModalTitleText">Tambah Kegiatan Baru</span>
+        </h3>
+        <button onclick="closeFolderModal()" style="border:0;background:none;font-size:24px;color:var(--mut);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+      <p style="color:var(--mut);font-size:13px;margin:0 0 14px;line-height:1.5;">
+        Folder kegiatan tersimpan di database MySQL phpMyAdmin dan digunakan untuk mengelompokkan berkas rekap serta transaksi keuangan RT.
+      </p>
+      <form onsubmit="handleFolderSubmit(event)">
+        <input type="hidden" id="fId" value="">
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Nama Kegiatan / Folder: *</label>
+          <input type="text" id="fNama" placeholder="Contoh: Peringatan HUT RI Ke-81, Posyandu, dll" style="width:100%;height:36px;font-size:13px;" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Penanggung Jawab (PIC):</label>
+            <input type="text" id="fPic" placeholder="Contoh: Panitia HUT RI" style="width:100%;height:36px;font-size:13px;">
+          </div>
+          <div>
+            <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Pagu Anggaran (Rp):</label>
+            <input type="number" id="fPagu" min="0" step="1000" placeholder="0 jika tidak dibatasi" style="width:100%;height:36px;font-size:13px;">
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Ikon Kegiatan:</label>
+          <select id="fIcon" style="width:100%;height:36px;font-size:13px;">
+            <option value="folder">📁 Folder Standar</option>
+            <option value="iur">💰 Iuran Warga</option>
+            <option value="ops">⚙️ Operasional RT</option>
+            <option value="keb">🛡️ Kebersihan & Keamanan</option>
+            <option value="pem">🏗️ Pembangunan Fasilitas</option>
+            <option value="sos">🤝 Kegiatan Sosial</option>
+            <option value="lib">🏖️ Liburan & Wisata</option>
+            <option value="kar">🎉 Karnaval & Acara</option>
+          </select>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;">
+          <button type="button" class="btn ghost sm" onclick="closeFolderModal()">Batal</button>
+          <button type="submit" class="btn sm" id="btnSaveFolder">💾 Simpan Kegiatan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Sampaikan Usulan Warga -->
+  <div id="usulModal" class="modal-overlay" onclick="if(event.target===this)closeUsulModal()">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
+          <span>💡</span> Sampaikan Usulan & Aspirasi Warga
+        </h3>
+        <button onclick="closeUsulModal()" style="border:0;background:none;font-size:24px;color:var(--mut);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+      <p style="font-size:13px;color:var(--mut);margin-bottom:16px;line-height:1.4;">
+        Sampaikan ide pembangunan, saran kegiatan, atau aspirasi kebutuhan warga RT 01 / RW 02 untuk ditinjau bersama pengurus.
+      </p>
+      <form id="usulFormModal" onsubmit="submitUsulan(event)">
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Judul Usulan / Kebutuhan:</label>
+          <input type="text" id="usulJudul" required placeholder="Contoh: Pengadaan Alat Fogging Nyamuk" style="width:100%;height:36px;padding:0 10px;font-size:13px;border:1px solid var(--line);border-radius:6px;outline:none;background:var(--card);color:var(--ink);">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Nama Pengusul & Blok / No. Rumah:</label>
+          <input type="text" id="usulNama" required placeholder="Contoh: Bpk. Santoso (Blok B-12)" style="width:100%;height:36px;padding:0 10px;font-size:13px;border:1px solid var(--line);border-radius:6px;outline:none;background:var(--card);color:var(--ink);">
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;">Rincian Usulan & Alasan Kebutuhan:</label>
+          <textarea id="usulRincian" required rows="3" placeholder="Jelaskan rincian usulan atau ide kegiatan untuk kemaslahatan warga RT..." style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--line);border-radius:6px;outline:none;background:var(--card);color:var(--ink);"></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;">
+          <button type="button" class="btn ghost sm" onclick="closeUsulModal()">Batal</button>
+          <button type="submit" class="btn sm">💡 Kirimkan Usulan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SheetJS (xlsx.full.min.js) for Native Excel XLSX Export & Import -->
+  <script src="js/xlsx.full.min.js"></script>
+  <script>
+    if (typeof XLSX === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"><\\/script>');
+    }
+  </script>
+
+  <script>
+    // Standalone Synchronous SHA-256 Hash Function (Enkripsi Satu Arah untuk Privasi Maksimal)
+    function sha256(ascii) {
+      function rightRotate(value, amount) {
+        return (value >>> amount) | (value << (32 - amount));
+      }
+      const mathPow = Math.pow;
+      const maxWord = mathPow(2, 32);
+      const lengthProperty = 'length';
+      let i, j;
+      let result = '';
+      const words = [];
+      const asciiBitLength = ascii[lengthProperty] * 8;
+      let hash = [];
+      const k = [];
+      let primeCounter = 0;
+      const isComposite = {};
+      for (let candidate = 2; primeCounter < 64; candidate++) {
+        if (!isComposite[candidate]) {
+          for (i = 0; i < 313; i += candidate) {
+            isComposite[i] = candidate;
+          }
+          hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+          k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+        }
+      }
+      hash = hash.slice(0, 8);
+      ascii += '\x80';
+      while (ascii[lengthProperty] % 64 - 56) ascii += '\x00';
+      for (i = 0; i < ascii[lengthProperty]; i++) {
+        j = ascii.charCodeAt(i);
+        if (j >> 8) return;
+        words[i >> 2] |= j << ((3 - i) % 4) * 8;
+      }
+      words[words[lengthProperty]] = ((asciiBitLength / maxWord) | 0);
+      words[words[lengthProperty]] = (asciiBitLength);
+      for (j = 0; j < words[lengthProperty];) {
+        const w = words.slice(j, j += 16);
+        const oldHash = hash;
+        hash = hash.slice(0, 8);
+        for (i = 0; i < 64; i++) {
+          const i2 = i + j;
+          const w15 = w[i - 15], w2 = w[i - 2];
+          const a = hash[0], e = hash[4];
+          const temp1 = hash[7]
+            + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25))
+            + ((e & hash[5]) ^ ((~e) & hash[6]))
+            + k[i]
+            + (w[i] = (i < 16) ? w[i] : (
+                w[i - 16]
+                + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3))
+                + w[i - 7]
+                + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))
+              ) | 0
+            );
+          const temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22))
+            + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+          hash = [(temp1 + temp2) | 0].concat(hash);
+          hash[4] = (hash[4] + temp1) | 0;
+        }
+        for (i = 0; i < 8; i++) {
+          hash[i] = (hash[i] + oldHash[i]) | 0;
+        }
+      }
+      for (i = 0; i < 8; i++) {
+        for (j = 3; j + 1; j--) {
+          const b = (hash[i] >> (j * 8)) & 255;
+          result += ((b < 16) ? 0 : '') + b.toString(16);
+        }
+      }
+      return result;
+    }
+
+    // Verifikasi pengurus dilakukan di server (api/api.php) - hash email tersimpan di tabel `admins`.
+    let adminAuth = false;
+
+    function isAdminAuth() {
+      return adminAuth === true;
+    }
+
+    // Mode modal: login | setup | reset | change | recovery
+    let authMode = "login";
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      const $ = id => document.getElementById(id);
+      const show = (id, on) => { $(id).style.display = on ? "" : "none"; };
+      const cfg = {
+        login:   { title: "Autentikasi Pengurus RT", desc: "Masuk dengan email dan password pengurus RT 01 / RW 02.", btn: "Masuk", passLabel: "Password", email: true, pass: true, pass2: false, code: false, current: false },
+        setup:   { title: "Buat Password Admin", desc: "Pertama kali masuk? Buat password untuk email pengurus Anda.", btn: "Buat Password & Masuk", passLabel: "Password Baru", email: true, pass: true, pass2: true, code: false, current: false },
+        reset:   { title: "Reset Password", desc: "Masukkan email, kode pemulihan, dan password baru.", btn: "Reset Password", passLabel: "Password Baru", email: true, pass: true, pass2: true, code: true, current: false },
+        change:  { title: "Ganti Password", desc: "Ubah password akun admin Anda.", btn: "Simpan Password", passLabel: "Password Baru", email: false, pass: true, pass2: true, code: false, current: true },
+        recovery:{ title: "Password Tersimpan", desc: "Berhasil. Simpan kode pemulihan di bawah ini.", btn: "Selesai", email: false, pass: false, pass2: false, code: false, current: false }
+      }[mode];
+      $("authTitle").textContent = cfg.title;
+      $("authDesc").textContent = cfg.desc;
+      $("authSubmit").textContent = cfg.btn;
+      if (cfg.passLabel) $("authPassLabel").textContent = cfg.passLabel;
+      show("authRowEmail", cfg.email); show("authRowPass", cfg.pass); show("authRowPass2", cfg.pass2);
+      show("authRowCode", cfg.code); show("authRowCurrent", cfg.current);
+      show("authRecovery", mode === "recovery");
+      show("authCancel", mode !== "recovery");
+      $("authPass").autocomplete = (mode === "login") ? "current-password" : "new-password";
+      $("authError").style.display = "none";
+      const link = (m, t) => `<a href="javascript:void(0)" onclick="setAuthMode('${m}')" style="color:var(--pri);font-weight:600;">${t}</a>`;
+      $("authLinks").innerHTML =
+        mode === "login" ? link("reset", "Lupa password?") + link("setup", "Belum punya password? Buat") :
+        (mode === "setup" || mode === "reset") ? link("login", "← Kembali ke Masuk") : "";
+    }
+
+    function openAuthModal(mode = "login") {
+      const m = document.getElementById("authModal");
+      if (!m) return;
+      ["authEmail", "authPass", "authPass2", "authCode", "authCurrent"].forEach(id => document.getElementById(id).value = "");
+      setAuthMode(mode);
+      m.classList.add("show");
+      setTimeout(() => document.getElementById(mode === "change" ? "authCurrent" : "authEmail").focus(), 50);
+    }
+
+    function closeAuthModal() {
+      const m = document.getElementById("authModal");
+      if (m) m.classList.remove("show");
+    }
+
+    function openChangePasswordModal() { openAuthModal("change"); }
+
+    // Panduan web (Warga / Admin)
+    function showGuideTab(tab) {
+      const admin = tab === "admin";
+      document.getElementById("gdWarga").style.display = admin ? "none" : "";
+      document.getElementById("gdAdmin").style.display = admin ? "" : "none";
+      document.getElementById("gdTabWarga").classList.toggle("on", !admin);
+      document.getElementById("gdTabAdmin").classList.toggle("on", admin);
+      document.querySelector("#guideModal .gd-body").scrollTop = 0;
+    }
+    function openGuide() {
+      document.getElementById("guideModal").classList.add("show");
+      showGuideTab(isAdminAuth() ? "admin" : "warga");
+    }
+    function closeGuide() {
+      document.getElementById("guideModal").classList.remove("show");
+    }
+
+    function finishAdminLogin(msg) {
+      adminAuth = true;
+      st.m = "a";
+      toast(msg);
+      render();
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const $ = id => document.getElementById(id);
+      const err = $("authError");
+      const email = ($("authEmail").value || "").trim().toLowerCase();
+      const pass = $("authPass").value;
+      const pass2 = $("authPass2").value;
+      const showErr = msg => { err.textContent = msg; err.style.display = "block"; };
+      err.style.display = "none";
+
+      if (authMode === "recovery") { closeAuthModal(); return; }
+      if (authMode !== "change" && !email) return showErr("Email wajib diisi.");
+      if (authMode !== "login" && pass !== pass2) return showErr("Password baru dan ulangi password tidak sama.");
+
+      try {
+        let res;
+        if (authMode === "login") {
+          res = await api("login", { email, password: pass });
+          if (res.need_setup) { setAuthMode("setup"); showErr(res.error); return; }
+          closeAuthModal();
+          finishAdminLogin("Autentikasi Berhasil: Selamat datang, Pengurus RT");
+        } else if (authMode === "setup" || authMode === "reset") {
+          res = await api(authMode === "setup" ? "set_password" : "reset_password",
+            { email, password: pass, code: $("authCode").value });
+          finishAdminLogin(authMode === "setup" ? "Password dibuat, selamat datang" : "Password berhasil direset");
+          setAuthMode("recovery");
+          $("authRecoveryCode").textContent = res.recovery_code;
+        } else if (authMode === "change") {
+          await api("change_password", { current: $("authCurrent").value, password: pass });
+          closeAuthModal();
+          toast("Password berhasil diganti");
+        }
+      } catch (ex) {
+        showErr((ex.data && ex.data.error) ? ex.data.error : ex.message);
+      }
+    }
+
+    function logoutAdmin() {
+      api("logout", {}).catch(() => {}).finally(() => {
+        adminAuth = false;
+        st.m = "w";
+        if (st.v == "kelola") st.v = "home";
+        toast("Berhasil keluar dari Mode Admin");
+        render();
+      });
+    }
+
+    // Clean, simple monochrome SVG icons (minimalist line style)
+    const ICONS = {
+      home: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>',
+      kas: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>',
+      arsip: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>',
+      usul: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
+      kelola: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>',
+      
+      // Clean icons for each category/folder
+      iur: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>',
+      ops: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>',
+      keb: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
+      pem: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"></path><path d="M5 20V8.2a1 1 0 0 1 .5-.86l5.5-3.14a1 1 0 0 1 1 0l5.5 3.14a1 1 0 0 1 .5.86V20"></path></svg>',
+      sos: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>',
+      lib: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>',
+      kar: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>',
+
+      // General utility icons
+      wallet: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>',
+      inArrow: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="7" x2="17" y2="17"></line><polyline points="17 7 17 17 7 17"></polyline></svg>',
+      outArrow: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>',
+      list: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>',
+      folder: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>',
+      doc: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>',
+      edit: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>',
+      trash: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
+      download: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>',
+      plus: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
+      check: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+      grid: '<svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>'
+    };
+
+    // Formatters
+    const R = n => "Rp " + (Number(n) || 0).toLocaleString("id-ID");
+    const D = s => s ? new Date(s).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-";
+    const escapeAttr = s => (s || "").toString().replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    // Standard structural categories with simple icon keys (dimuat dinamis dari database MySQL)
+    let F = [
+      { id: "iur", n: "Iuran Warga", pic: "Bendahara RT", pagu: 0, ic: "iur" },
+      { id: "ops", n: "Operasional RT", pic: "Sekretaris RT", pagu: 0, ic: "ops" },
+      { id: "keb", n: "Kebersihan & Keamanan", pic: "Seksi Keamanan", pagu: 0, ic: "keb" },
+      { id: "pem", n: "Pembangunan Fasilitas", pic: "Seksi Pembangunan", pagu: 0, ic: "pem" },
+      { id: "sos", n: "Kegiatan Sosial", pic: "Seksi Sosial", pagu: 0, ic: "sos" },
+      { id: "lib", n: "Liburan & Wisata", pic: "Panitia Wisata", pagu: 0, ic: "lib" },
+      { id: "kar", n: "Karnaval & Acara", pic: "Panitia Acara", pagu: 0, ic: "kar" }
+    ];
+
+    // Berkas Rekapan Riwayat per Tanggal / Periode (Struktur File Explorer)
+    // Data disimpan di database MySQL lewat api/api.php (kelola via phpMyAdmin).
+    async function api(action, payload) {
+      const opt = { credentials: "same-origin" };
+      if (payload !== undefined) {
+        opt.method = "POST";
+        opt.headers = { "Content-Type": "application/json" };
+        opt.body = JSON.stringify(payload);
+      }
+      let res, data;
+      try {
+        res = await fetch("api/api.php?a=" + action, opt);
+        data = await res.json();
+      } catch (e) {
+        throw new Error("Server PHP/database tidak terjangkau. Buka aplikasi lewat server PHP (php -S localhost:3000) atau XAMPP.");
+      }
+      if (!res.ok) {
+        const err = new Error(data.error || "Terjadi kesalahan");
+        err.status = res.status;
+        err.data = data;
+        throw err;
+      }
+      return data;
+    }
+
+    let C = [];
+    let kasRev = 0;
+    let savingChain = Promise.resolve();
+    // Simpan berkas rekap + transaksi (admin) ke database, berurutan agar tidak saling timpa.
+    function saveKas() {
+      savingChain = savingChain
+        .then(() => api("save_kas", { catatan: C, transaksi: T, rev: kasRev }))
+        .then(res => { kasRev = res.rev; })
+        .catch(async e => {
+          alert(e.status === 409 ? e.message : "Gagal menyimpan ke database: " + e.message);
+          if (e.status === 403) { adminAuth = false; st.m = "w"; render(); }
+          if (e.status === 409) { await loadAll(); render(); }
+        });
+      return savingChain;
+    }
+    function saveCatatan() { return saveKas(); }
+
+    async function loadAll() {
+      try {
+        const d = await api("state");
+        if (d.folders && Array.isArray(d.folders) && d.folders.length > 0) {
+          F = d.folders;
+        }
+        C = d.catatan;
+        T.length = 0;
+        T.push(...d.transaksi);
+        U = d.usulan;
+        kasRev = d.rev || 0;
+        adminAuth = !!d.admin;
+        st.m = adminAuth ? "a" : "w";
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+    // Urutkan berkas: terbaru di atas (rapi saat berkas makin banyak)
+    const sortCat = list => [...list].sort((a, b) => (b.d || "").localeCompare(a.d || "") || String(b.id).localeCompare(String(a.id)));
+
+    // Pelacak berkas yang sudah diunduh (per sesi browser)
+    function getDownloadedFiles() {
+      try { return JSON.parse(sessionStorage.getItem("kas_rt_dl_files") || "[]"); } catch (e) { return []; }
+    }
+    function isDownloaded(id) { return getDownloadedFiles().includes(id); }
+    function markAsDownloaded(id) {
+      const l = getDownloadedFiles();
+      if (!l.includes(id)) l.push(id);
+      try { sessionStorage.setItem("kas_rt_dl_files", JSON.stringify(l)); } catch (e) {}
+    }
+    const B = [];
+    const T = [];
+
+    let U = [];
+
+    // Calculation Helpers
+    const sum = a => a.reduce((s, t) => s + (t.t == "i" ? t.n : -t.n), 0);
+    const tin = a => a.filter(t => t.t == "i").reduce((s, t) => s + t.n, 0);
+    const tout = a => a.filter(t => t.t == "o").reduce((s, t) => s + t.n, 0);
+    const fn = id => F.find(f => f.id == id) || { n: "-", ic: "folder" };
+    const cn = id => C.find(c => c.id == id) || { t: "-" };
+    const dup = t => T.filter(x => x.d == t.d && x.n == t.n && x.k == t.k && x.t == t.t).length > 1;
+
+    // View state
+    let st = {
+      v: "home",
+      m: "w",
+      tab: "all",
+      q: "",
+      ff: "",
+      fold: null,
+      cat: null,
+      view: "grid",
+      sel: null
+    };
+
+    const NAV = [
+      ["home", ICONS.home, "Beranda"],
+      ["kas", ICONS.kas, "Buku Kas"],
+      ["arsip", ICONS.arsip, "Arsip"],
+      ["usul", ICONS.usul, "Usulan"]
+    ];
+
+    const TT = {
+      home: ["Beranda", "Ringkasan kas RT 01 / RW 02 Desa Sladi"],
+      kas: ["Buku Kas", "Semua uang masuk dan keluar dalam satu tempat"],
+      arsip: ["Arsip", "Buka folder kegiatan secara terstruktur"],
+      usul: ["Usulan Warga", "Sampaikan aspirasi, pengurus menanggapi"],
+      kelola: ["Kelola", "Kegiatan, kategori, impor data, dan pengaturan"]
+    };
+
+    function toast(m) {
+      const t = document.getElementById("toast");
+      t.innerHTML = `${ICONS.check} <span>${m}</span>`;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2000);
+    }
+
+    function go(v) {
+      st.v = v;
+      if (v != "arsip") {
+        st.fold = null;
+        st.cat = null;
+      }
+      render();
+    }
+
+    function nav() {
+      const items = NAV.concat(st.m == "a" ? [["kelola", ICONS.kelola, "Kelola"]] : []);
+      
+      document.getElementById("side").innerHTML = 
+        `<div class="brand">
+          <div class="brand-title">
+            <span class="brand-badge">${ICONS.keb}</span>
+            <span>Kas RT 01 / RW 02</span>
+          </div>
+          <small>
+            Desa Sladi
+            ${st.m == "a" ? ` • <span class='badge b-w'>Admin</span><div style="font-size:11.5px;color:var(--pri);margin-top:6px;line-height:1.4;"><span style="font-weight:600;">Pengurus Terverifikasi</span> <a href="javascript:void(0)" onclick="logoutAdmin()" style="color:var(--out);margin-left:4px;font-weight:600;text-decoration:underline;">Keluar</a></div>` : ""}
+          </small>
+        </div>` +
+        items.map(i => `<button class="nav ${st.v == i[0] ? "on" : ""}" onclick="go('${i[0]}')"><span class="i">${i[1]}</span><span>${i[2]}</span></button>`).join("") +
+        `<div class="side-foot">
+          <select aria-label="Tahun">
+            <option>Tahun: Semua</option>
+            <option>2026</option>
+            <option>2025</option>
+          </select>
+          <button class="btn ghost sm" onclick="openGuide()">📖 Panduan</button>
+          ${st.m == "a" ? `<button class="btn ghost sm" onclick="openChangePasswordModal()" style="margin-top:4px;">Ganti Password</button><button class="btn danger sm" onclick="logoutAdmin()" style="margin-top:4px;">Keluar Admin</button>` : ""}
+        </div>`;
+
+      const b = document.getElementById("bot");
+      b.style.gridTemplateColumns = `repeat(${items.length}, 1fr)`;
+      b.innerHTML = items.map(i => 
+        `<button class="${st.v == i[0] ? "on" : ""}" onclick="go('${i[0]}')">
+          <span class="i">${i[1]}</span>
+          <span>${i[2]}</span>
+        </button>`
+      ).join("");
+    }
+
+    function expo() {
+      const x = st.v;
+      const a = st.m == "a";
+      let h = "";
+
+      // Menu ini khusus ekspor global; unduh per berkas ada di daftar berkas.
+
+      h += `
+        <button onclick="exportAllRekapXLSX()">${ICONS.download} Rekap Semua Kegiatan (.xlsx)</button>
+        <button onclick="exportAllTransactionsXLSX()">${ICONS.download} Seluruh Buku Kas (.xlsx)</button>
+        <button onclick="window.print()">${ICONS.doc} Cetak Laporan / PDF</button>
+      `;
+
+      if (a) {
+        h += `<hr><em>Khusus admin</em><button onclick="openSpreadsheetModal('${st.fold || ''}')">${ICONS.plus} Input Spreadsheet</button>`;
+      }
+      h += `<hr><button onclick="document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()">Layar penuh</button>`;
+      document.getElementById("drop").innerHTML = h;
+    }
+
+    function home() {
+      const a = T;
+      const rec = [...T].sort((x, y) => y.d.localeCompare(x.d)).slice(0, 5);
+      const expenses = F.map(f => tout(T.filter(t => t.f == f.id)));
+      const mx = Math.max(0, ...expenses);
+      const totalMasuk = tin(a);
+      const totalKeluar = tout(a);
+      const outRatio = totalMasuk > 0 ? (totalKeluar / totalMasuk * 100) : 0;
+
+      return `
+        <div class="stats">
+          <div class="card stat">
+            <div class="stat-head">
+              <small>Saldo kas</small>
+              <span class="stat-ic">${ICONS.wallet}</span>
+            </div>
+            <b>${R(sum(a))}</b>
+          </div>
+          <div class="card stat">
+            <div class="stat-head">
+              <small>Total uang masuk</small>
+              <span class="stat-ic in">${ICONS.inArrow}</span>
+            </div>
+            <b class="in">${R(totalMasuk)}</b>
+          </div>
+          <div class="card stat">
+            <div class="stat-head">
+              <small>Total uang keluar</small>
+              <span class="stat-ic out">${ICONS.outArrow}</span>
+            </div>
+            <b class="out">${R(totalKeluar)}</b>
+          </div>
+          <div class="card stat">
+            <div class="stat-head">
+              <small>Jumlah transaksi</small>
+              <span class="stat-ic">${ICONS.list}</span>
+            </div>
+            <b>${a.length}</b>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h2>Pengeluaran per kegiatan</h2>
+            ${F.map(f => {
+              const o = tout(T.filter(t => t.f == f.id));
+              return `
+                <div class="bar">
+                  <span style="display:flex;align-items:center;gap:6px;">
+                    ${ICONS[f.ic] || ICONS.folder} ${f.n}
+                  </span>
+                  <div class="track">
+                    <i style="width:${mx ? (o / mx * 100) : 0}%;background:var(--out)"></i>
+                  </div>
+                  <b class="r">${R(o)}</b>
+                </div>`;
+            }).join("")}
+          </div>
+
+          <div class="card">
+            <h2>Uang masuk vs keluar</h2>
+            <div class="bar">
+              <span>Masuk</span>
+              <div class="track"><i style="width:100%;background:var(--in)"></i></div>
+              <b class="r">${R(totalMasuk)}</b>
+            </div>
+            <div class="bar">
+              <span>Keluar</span>
+              <div class="track"><i style="width:${outRatio}%;background:var(--out)"></i></div>
+              <b class="r">${R(totalKeluar)}</b>
+            </div>
+            <p style="color:var(--mut);font-size:13.5px;margin-top:16px;">
+              Semua angka dihitung dari tabel transaksi yang terverifikasi dan transparan.
+            </p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn" onclick="openUsulModal()">${ICONS.plus} Sampaikan Usulan</button>
+              ${st.m == "a" ? `<button class="btn ghost" onclick="openSpreadsheetModal()">${ICONS.list} Input Spreadsheet</button>` : ""}
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Transaksi terbaru</h2>
+          ${tbl(rec, false)}
+        </div>
+      `;
+    }
+
+    function check() {
+      return "";
+    }
+
+    function tbl(a, act) {
+      const colSpan = act ? 8 : 7;
+      const hasData = a && a.length > 0;
+
+      return `
+        <div style="overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card);">
+          <table class="resp" style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="width:45px;text-align:center;">#</th>
+                <th style="width:115px;">Tanggal</th>
+                <th style="width:100px;">Jenis</th>
+                <th style="width:160px;">Folder / Kegiatan</th>
+                <th>Uraian / Keterangan</th>
+                <th class="r" style="width:135px;">Jumlah (Rp)</th>
+                <th style="width:150px;">Pihak / Nama Warga</th>
+                ${act ? "<th style='width:90px;' class='r'>Aksi</th>" : ""}
+              </tr>
+            </thead>
+            <tbody>
+              ${hasData ? a.map((t, idx) => `
+                <tr>
+                  <td style="text-align:center;color:var(--mut);font-size:12px;font-weight:700;">${idx + 1}</td>
+                  <td>${D(t.d)}</td>
+                  <td>
+                    <span class="badge ${t.t == "i" ? "b-in" : "b-out"}">
+                      ${t.t == "i" ? ICONS.inArrow + " Masuk" : ICONS.outArrow + " Keluar"}
+                    </span>
+                  </td>
+                  <td>
+                    <a style="color:var(--pri);cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:4px;" onclick="st.fold='${t.f}';st.cat='${t.c}';go('arsip')">
+                      ${ICONS[fn(t.f).ic] || ICONS.folder} ${fn(t.f).n}
+                    </a>
+                    ${t.c && cn(t.c).t ? `<br><small style="color:var(--mut)">${cn(t.c).t}</small>` : ""}
+                  </td>
+                  <td>
+                    <b>${t.k}</b>
+                  </td>
+                  <td class="r ${t.t == "i" ? "in" : "out"}">
+                    <b>${t.t == "i" ? "+" : "−"}${R(t.n)}</b>
+                  </td>
+                  <td>${t.s || "—"}</td>
+                  ${act ? `
+                    <td class="r">
+                      <button class="btn danger sm" aria-label="Hapus" onclick="deleteSingleTx(${idx})">${ICONS.trash} Hapus</button>
+                    </td>` : ""}
+                </tr>
+              `).join("") : `
+                <tr>
+                  <td colspan="${colSpan}" style="text-align:center;padding:24px 14px;color:var(--mut);font-size:13px;">
+                    Belum ada data transaksi
+                  </td>
+                </tr>
+              `}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function deleteSingleTx(idx) {
+      if (confirm("Hapus transaksi ini?")) {
+        T.splice(idx, 1);
+        saveKas();
+        toast("Transaksi dihapus");
+        render();
+      }
+    }
+
+    function kas() {
+      let a = T.filter(t => 
+        (st.tab == "all" || t.t == st.tab) &&
+        (!st.ff || t.f == st.ff) &&
+        (!st.q || (t.k + t.s).toLowerCase().includes(st.q.toLowerCase()))
+      );
+
+      return `
+        <div class="tabs">
+          ${[
+            ["all", ICONS.list, "Semua"],
+            ["i", ICONS.inArrow, "Uang Masuk"],
+            ["o", ICONS.outArrow, "Uang Keluar"]
+          ].map(x => `
+            <button class="${st.tab == x[0] ? "on" : ""}" onclick="st.tab='${x[0]}';render()">
+              ${x[1]} ${x[2]}
+            </button>
+          `).join("")}
+          <span class="sp"></span>
+          ${st.m == "a" ? `
+            <button class="btn" onclick="openSpreadsheetModal()">${ICONS.plus} Input Spreadsheet (Multi-Baris)</button>
+          ` : ""}
+        </div>
+
+        <div class="filters">
+          <input id="q" placeholder="Cari keterangan / sumber" value="${st.q}" oninput="st.q=this.value;render(true)">
+          <select onchange="st.ff=this.value;render()">
+            <option value="">Semua folder kegiatan</option>
+            ${F.map(f => `<option value="${f.id}" ${st.ff == f.id ? "selected" : ""}>${f.n}</option>`).join("")}
+          </select>
+        </div>
+
+        <div class="sumbar">
+          <span>Masuk: <b class="in">${R(tin(a))}</b></span>
+          <span>Keluar: <b class="out">${R(tout(a))}</b></span>
+          <span>Saldo: <b>${R(sum(a))}</b></span>
+        </div>
+
+        ${tbl(a, st.m == "a")}
+      `;
+    }
+
+    function arsip() {
+      const crumb = `
+        <div class="crumb">
+          <a onclick="st.fold=null;st.cat=null;st.sel=null;render()">${ICONS.folder} Arsip</a>
+          ${st.fold ? ` › <a onclick="st.cat=null;st.sel=null;render()">${fn(st.fold).n}</a>` : ""}
+          ${st.cat ? " › <b>" + cn(st.cat).t + "</b>" : ""}
+        </div>
+      `;
+
+      st.openFolders = st.openFolders || { iur: true };
+
+      const tree = `
+        <div class="card tree">
+          <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:0.5px;padding:4px 6px 8px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);margin-bottom:6px;">
+            <span>🗂️ Struktur Explorer</span>
+            <a onclick="st.fold=null;st.cat=null;render()" style="cursor:pointer;font-size:11px;color:var(--pri);font-weight:600;">Semua Folder</a>
+          </div>
+          ${F.map(f => {
+            const fCatatan = C.filter(c => c.f == f.id);
+            const isOpen = (st.fold == f.id) || (st.openFolders && st.openFolders[f.id]);
+            const isFoldActive = (st.fold == f.id && !st.cat);
+
+            return `
+              <div class="tree-folder-group">
+                <div class="tree-folder-row ${isFoldActive ? 'on' : ''}">
+                  <button type="button" class="tree-toggle-btn" onclick="toggleTreeFolder('${f.id}')" title="${isOpen ? 'Tutup sub-berkas' : 'Buka sub-berkas'}">
+                    ${isOpen ? '▼' : '▶'}
+                  </button>
+                  <button type="button" class="tree-folder-btn" onclick="selectTreeFolder('${f.id}')" title="Buka folder ${f.n}">
+                    ${ICONS[f.ic] || ICONS.folder}
+                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${f.n}</span>
+                    <span class="badge" style="font-size:10px;padding:1px 5px;margin-left:auto;background:rgba(0,0,0,0.06);color:var(--mut);">${fCatatan.length}</span>
+                  </button>
+                </div>
+
+                ${isOpen ? `
+                  <div class="tree-sub-files">
+                    ${fCatatan.length > 0 ? sortCat(fCatatan).map(c => `
+                      <div style="display:flex;align-items:center;gap:2px;">
+                      <button type="button" class="tree-file-btn ${st.cat == c.id ? 'on' : ''}" style="flex:1;min-width:0;width:auto;" onclick="selectTreeFile('${f.id}', '${c.id}')" title="${escapeAttr(c.t)}">
+                        <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        <div style="flex:1;min-width:0;overflow:hidden;">
+                          <div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;font-size:11.5px;">${escapeAttr(c.t.replace(/Rekap\s+(Iuran\s+Warga|Operasional\s+RT|Kebersihan\s*&\s*Keamanan|Pembangunan\s+Pos\s+Ronda|Santunan\s*&\s*Kepedulian|Kas\s+Family\s+Gathering|Kas\s+Peringatan\s+HUT\s+RI)\s*[–-]\s*/i, ''))}</div>
+                          <small style="font-size:10px;color:var(--mut);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">📅 ${escapeAttr(c.p || D(c.d))}</small>
+                        </div>
+                        <span class="badge ${c.s == 'Final' ? 'b-in' : 'b-w'}" style="font-size:9px;padding:1px 4px;flex-shrink:0;">${c.s}</span>
+                      </button>
+                      <button type="button" onclick="exportCatatanXLSX('${c.id}')" title="${isDownloaded(c.id) ? 'Sudah diunduh – klik untuk unduh lagi' : 'Unduh berkas (.xlsx)'}" style="flex-shrink:0;border:0;background:none;cursor:pointer;padding:4px;border-radius:5px;display:flex;align-items:center;gap:2px;font-size:10px;font-weight:700;color:${isDownloaded(c.id) ? 'var(--in, #0d8a5b)' : 'var(--mut)'};">${isDownloaded(c.id) ? '✓' : ICONS.download}</button>
+                      </div>
+                    `).join("") : `
+                      <div style="font-size:11px;color:var(--mut);padding:4px 8px;font-style:italic;">Belum ada berkas</div>
+                    `}
+                    ${st.m == "a" ? `
+                      <button type="button" onclick="openNewRekapModal('${f.id}')" style="display:flex;align-items:center;gap:4px;border:0;background:none;color:var(--pri);font-size:11px;font-weight:600;padding:3px 6px;cursor:pointer;border-radius:4px;margin-top:2px;">
+                        ${ICONS.plus} + Rekap Baru
+                      </button>
+                    ` : ''}
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+
+      let mid = "";
+      let det = "";
+
+      if (!st.fold) {
+        mid = `
+          <div class="tabs">
+            <button class="${st.view == "grid" ? "on" : ""}" onclick="st.view='grid';render()">${ICONS.grid} Kotak</button>
+            <button class="${st.view == "list" ? "on" : ""}" onclick="st.view='list';render()">${ICONS.list} Daftar</button>
+            <span class="sp"></span>
+            ${st.m == "a" ? `<button class="btn sm" onclick="openSpreadsheetModal()">${ICONS.plus} Input Spreadsheet</button>` : ""}
+          </div>
+          <div class="${st.view == "grid" ? "folders" : ""}">
+            ${F.map(f => {
+              const a = T.filter(t => t.f == f.id);
+              const s = sum(a);
+              const n = a.length;
+              const fIcon = ICONS[f.ic] || ICONS.folder;
+
+              return st.view == "grid" ? `
+                <div class="card fold" onclick="st.fold='${f.id}';render()">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+                    <div class="fold-ic">${fIcon}</div>
+                  </div>
+                  <b>${f.n}</b>
+                  <small>${n} transaksi tercatat</small>
+                  <div style="margin-top:6px">
+                    <span class="${s < 0 ? "out" : "in"}"><b>${R(s)}</b></span>
+                  </div>
+                  ${s < 0 ? '<span class="badge b-out" style="margin-top:4px;">Saldo minus</span>' : ""}
+                </div>
+              ` : `
+                <div class="file" onclick="st.fold='${f.id}';render()">
+                  <span class="ic">${fIcon}</span>
+                  <div style="flex:1;">
+                    <b>${f.n}</b>
+                    <small>${n} transaksi tercatat</small>
+                  </div>
+                  <b class="${s < 0 ? "out" : "in"}" style="margin-right:12px;">${R(s)}</b>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        `;
+
+        det = `
+          <div class="card det">
+            <h2>Semua arsip kegiatan</h2>
+            <p style="color:var(--mut);font-size:13.5px;line-height:1.5;">Pilih salah satu folder kegiatan untuk melihat rincian kas, ekspor/impor file Excel (.xlsx), atau menambah transaksi massal.</p>
+            <div style="margin-top:14px;border-top:1px solid var(--line);padding-top:12px;">
+              <button class="btn sm" style="width:100%;justify-content:center;" onclick="exportAllRekapXLSX()">
+                ${ICONS.download} Rekap Semua Kegiatan (.xlsx)
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (!st.cat) {
+        // LEVEL 2: Folder File Explorer - Daftar Berkas Rekapan Riwayat per Tanggal
+        const f = fn(st.fold);
+        const fCatatan = C.filter(c => c.f == f.id);
+        const fTxs = T.filter(t => t.f == f.id);
+        const fIcon = ICONS[f.ic] || ICONS.folder;
+
+        mid = `
+          <!-- Toolbar folder kegiatan -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+            <div class="sumbar" style="margin:0;flex:1;">
+              <span>Total Masuk: <b class="in">${R(tin(fTxs))}</b></span>
+              <span>Total Keluar: <b class="out">${R(tout(fTxs))}</b></span>
+              <span>Saldo Folder: <b>${R(sum(fTxs))}</b></span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              ${st.m == "a" ? `
+                <button class="btn sm" onclick="openNewRekapModal('${f.id}')">
+                  ${ICONS.plus} Buat Berkas Rekap Baru
+                </button>
+                <button class="btn ghost sm" onclick="openSpreadsheetModal('${f.id}')">
+                  ${ICONS.grid} Input Spreadsheet
+                </button>
+              ` : ""}
+            </div>
+          </div>
+
+          <!-- File Explorer Section Header -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div style="font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:6px;">
+              ${ICONS.doc} Berkas Rekapan Riwayat per Tanggal / Periode (${fCatatan.length})
+            </div>
+            <div style="font-size:12px;color:var(--mut);">
+              Klik berkas untuk membuka rincian kas & tabel template
+            </div>
+          </div>
+
+          <!-- Files Grid / List -->
+          <div class="folder-files-container" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+            ${fCatatan.length > 0 ? sortCat(fCatatan).map(c => {
+              const cTxs = T.filter(t => t.c == c.id || (t.f == f.id && t.c == c.id));
+              const cMasuk = tin(cTxs);
+              const cKeluar = tout(cTxs);
+              const cSaldo = sum(cTxs);
+              return `
+                <div class="card file-rekap-card" style="padding:14px 16px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:14px;border:1px solid var(--line);" onclick="st.cat='${c.id}';render()">
+                  <div style="width:42px;height:42px;border-radius:8px;background:var(--pri2);display:flex;align-items:center;justify-content:center;color:var(--pri);flex-shrink:0;">
+                    <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="16" y2="17"></line></svg>
+                  </div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                      <b style="font-size:14.5px;color:var(--ink);">${escapeAttr(c.t)}</b>
+                      <span class="badge ${c.s == 'Final' ? 'b-in' : 'b-w'}" style="font-size:11px;">
+                        ${c.s == 'Final' ? '🔒 Final' : '✎ Draf'}
+                      </span>
+                    </div>
+                    <div style="font-size:12.5px;color:var(--mut);margin-top:3px;display:flex;gap:12px;flex-wrap:wrap;">
+                      <span>📅 Periode: <b>${escapeAttr(c.p || D(c.d))}</b></span>
+                      <span>📊 <b>${cTxs.length}</b> transaksi tercatat</span>
+                      <span>Masuk: <b class="in">${R(cMasuk)}</b></span>
+                      <span>Keluar: <b class="out">${R(cKeluar)}</b></span>
+                    </div>
+                  </div>
+                  <div style="text-align:right;flex-shrink:0;">
+                    <div style="font-size:14px;font-weight:700;" class="${cSaldo < 0 ? 'out' : 'in'}">${R(cSaldo)}</div>
+                    <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end;">
+                      <button class="btn ${isDownloaded(c.id) ? 'ghost ' : ''}sm" style="padding:2px 8px;height:26px;font-size:11.5px;" onclick="event.stopPropagation();exportCatatanXLSX('${c.id}')" title="Unduh berkas ini (.xlsx)">
+                        ${isDownloaded(c.id) ? '✓ Terunduh' : ICONS.download + ' Unduh .xlsx'}
+                      </button>
+                      <button class="btn sm" style="padding:2px 10px;height:26px;font-size:11.5px;">
+                        Buka Berkas ➔
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join("") : `
+              <div class="card" style="padding:24px;text-align:center;background:var(--card);border:1px dashed var(--line);border-radius:10px;">
+                <div style="font-size:32px;margin-bottom:8px;">📁</div>
+                <b style="font-size:15px;display:block;margin-bottom:4px;">Belum ada berkas rekapan riwayat di folder ini</b>
+                <p style="color:var(--mut);font-size:13px;max-width:460px;margin:0 auto 16px;">
+                  Berkas rekapan akan muncul di sini, diurutkan dari yang terbaru.
+                </p>
+                <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                  ${st.m == "a" ? `
+                    <button class="btn sm" onclick="openNewRekapModal('${f.id}')">
+                      ${ICONS.plus} Buat Berkas Rekap Baru
+                    </button>
+                  ` : ""}
+                </div>
+              </div>
+            `}
+          </div>
+
+          <!-- Section: Transaksi langsung / seluruh kegiatan (jika ada) -->
+          <div style="border-top:1px solid var(--line);padding-top:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span style="font-size:12.5px;font-weight:700;color:var(--mut);text-transform:uppercase;">
+                Pratinjau Tabel Template / Semua Transaksi Kegiatan (${fTxs.length})
+              </span>
+            </div>
+            ${tbl(fTxs, st.m == "a")}
+          </div>
+        `;
+
+        det = `
+          <div class="card det">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span class="stat-ic">${fIcon}</span>
+              <h2 style="margin:0;">${f.n}</h2>
+            </div>
+            <p style="margin:0;color:var(--mut);font-size:13.5px">Penanggung jawab: ${f.pic}</p>
+            <p style="font-size:13.5px;line-height:1.6;margin-top:10px;">
+              Masuk: <b class="in">${R(tin(fTxs))}</b><br>
+              Keluar: <b class="out">${R(tout(fTxs))}</b><br>
+              Saldo: <b>${R(sum(fTxs))}</b><br>
+              Total Berkas Rekap: <b>${fCatatan.length}</b><br>
+              Total Transaksi: <b>${fTxs.length}</b>
+            </p>
+
+          </div>
+        `;
+      } else {
+        // LEVEL 3: Inside a specific Catatan / Berkas Rekap
+        const f = fn(st.fold);
+        const c = cn(st.cat);
+        const cTxs = T.filter(t => t.c == c.id || (t.f == f.id && t.c == c.id));
+        const fIcon = ICONS[f.ic] || ICONS.folder;
+
+        mid = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+            <div>
+              <button class="btn ghost sm" onclick="st.cat=null;render()" style="margin-bottom:6px;">
+                ← Kembali ke Daftar Berkas
+              </button>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <h2 style="margin:0;font-size:18px;">📄 ${escapeAttr(c.t)}</h2>
+                <span class="badge ${c.s == 'Final' ? 'b-in' : 'b-w'}">
+                  ${c.s == 'Final' ? '🔒 Final' : '✎ Draf'}
+                </span>
+              </div>
+              <small style="color:var(--mut);">Periode: ${escapeAttr(c.p || D(c.d))} • Folder: ${f.n}</small>
+            </div>
+
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+              <button class="btn sm" onclick="exportCatatanXLSX('${c.id}')" title="Unduh berkas ini (.xlsx)">
+                ${isDownloaded(c.id) ? '✓ Terunduh – Unduh Lagi' : ICONS.download + ' Unduh Berkas (.xlsx)'}
+              </button>
+              ${st.m == "a" ? `
+                <button class="btn ghost sm" onclick="openImportXlsxModal('${f.id}', '${c.id}')" title="Impor transaksi ke berkas ini">
+                  Impor XLSX
+                </button>
+                <button class="btn danger sm" onclick="deleteCatatan('${c.id}')">Hapus Berkas</button>
+              ` : ''}
+              ${st.m == "a" ? `
+                <button class="btn ghost sm" onclick="toggleCatatanStatus('${c.id}')">
+                  ${c.s == 'Final' ? '🔓 Buka Kunci Draf' : '🔒 Kunci Final'}
+                </button>
+                ${c.s != 'Final' ? `
+                  <button class="btn sm" onclick="openSpreadsheetModal('${f.id}', '${c.id}')">
+                    ${ICONS.plus} Input Spreadsheet
+                  </button>
+                ` : ''}
+              ` : ''}
+            </div>
+          </div>
+
+          <div class="sumbar">
+            <span>Masuk: <b class="in">${R(tin(cTxs))}</b></span>
+            <span>Keluar: <b class="out">${R(tout(cTxs))}</b></span>
+            <span>Saldo: <b>${R(sum(cTxs))}</b></span>
+            <span>Jumlah Baris: <b>${cTxs.length}</b></span>
+          </div>
+
+          ${tbl(cTxs, st.m == "a" && c.s != "Final")}
+        `;
+
+        det = `
+          <div class="card det">
+            <h2>Rincian Berkas Rekap</h2>
+            <p><strong>${escapeAttr(c.t)}</strong></p>
+            <p style="color:var(--mut);font-size:13px;line-height:1.5;">${escapeAttr(c.desc || 'Rekapan riwayat kas berdasarkan periode kegiatan.')}</p>
+            
+            <div style="font-size:13px;line-height:1.6;margin-top:10px;padding:10px;background:var(--pri2);border-radius:8px;">
+              <div>Periode: <b>${escapeAttr(c.p || D(c.d))}</b></div>
+              <div>Status: <b>${c.s}</b></div>
+              <div>Masuk: <b class="in">${R(tin(cTxs))}</b></div>
+              <div>Keluar: <b class="out">${R(tout(cTxs))}</b></div>
+              <div>Saldo: <b>${R(sum(cTxs))}</b></div>
+            </div>
+
+            <div style="margin-top:12px;font-size:12.5px;">Unduhan: <b>${isDownloaded(c.id) ? '✓ Sudah diunduh' : 'Belum diunduh'}</b></div>
+          </div>
+        `;
+      }
+
+      return crumb + `<div class="explorer">${tree}<div>${mid}</div>${det}</div>`;
+    }
+
+    function toggleTreeFolder(fId) {
+      st.openFolders = st.openFolders || {};
+      st.openFolders[fId] = !st.openFolders[fId];
+      render();
+    }
+
+    function selectTreeFolder(fId) {
+      st.openFolders = st.openFolders || {};
+      st.openFolders[fId] = true;
+      st.fold = fId;
+      st.cat = null;
+      render();
+    }
+
+    function selectTreeFile(fId, cId) {
+      st.openFolders = st.openFolders || {};
+      st.openFolders[fId] = true;
+      st.fold = fId;
+      st.cat = cId;
+      render();
+    }
+
+    function usul() {
+      const hasUsulan = U && U.length > 0;
+      return `
+        <div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+          <div>
+            <h2 style="margin:0;font-size:18px;">Aspirasi & Usulan Warga RT</h2>
+            <small style="color:var(--mut);">Wadah transparan bagi warga menyampaikan ide, saran perbaikan, dan aspirasi pembangunan.</small>
+          </div>
+          <button class="btn" onclick="openUsulModal()">${ICONS.plus} Sampaikan Usulan</button>
+        </div>
+
+        ${hasUsulan ? `
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            ${U.map((u, i) => {
+              const uId = u.id || ("u_" + i);
+              u.id = uId;
+              const isBudgeted = u.st == "Telah Dianggarkan";
+              const isReviewed = u.st == "Sedang Ditinjau";
+              const isRejected = u.st == "Ditolak";
+              const badgeClass = isBudgeted ? "b-in" : (isReviewed ? "b-w" : "b-out");
+              const badgeIcon = isBudgeted ? "✅" : (isReviewed ? "⏳" : "❌");
+
+              return `
+                <div class="card" style="margin-bottom:0;position:relative;">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+                    <div style="flex:1;min-width:240px;">
+                      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                        <h3 style="margin:0;font-size:15px;color:var(--ink);">${escapeAttr(u.j)}</h3>
+                        ${st.m != "a" ? `
+                          <span class="badge ${badgeClass}" style="font-size:11px;">
+                            ${badgeIcon} ${escapeAttr(u.st || "Sedang Ditinjau")}
+                          </span>
+                        ` : ""}
+                      </div>
+                      <small style="color:var(--mut);display:block;margin-top:4px;">
+                        Diajukan oleh <b>${escapeAttr(u.o)}</b> • 📅 ${D(u.d)}
+                      </small>
+                    </div>
+
+                    ${st.m == "a" ? `
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:12px;color:var(--mut);font-weight:600;">Status:</span>
+                        <select onchange="updateUsulanStatus('${uId}', this.value)" style="height:32px;font-size:12px;padding:0 8px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);">
+                          <option value="Sedang Ditinjau" ${u.st == "Sedang Ditinjau" ? "selected" : ""}>⏳ Sedang Ditinjau</option>
+                          <option value="Telah Dianggarkan" ${u.st == "Telah Dianggarkan" ? "selected" : ""}>✅ Telah Dianggarkan</option>
+                          <option value="Ditolak" ${u.st == "Ditolak" ? "selected" : ""}>❌ Ditolak</option>
+                        </select>
+                        <button class="btn danger sm" onclick="deleteUsulan('${uId}')" title="Hapus usulan" style="padding:4px 8px;font-size:11px;">Hapus</button>
+                      </div>
+                    ` : ""}
+                  </div>
+
+                  <p style="margin:12px 0 10px;font-size:13.5px;line-height:1.5;color:var(--ink);background:var(--bg-sub, rgba(0,0,0,0.015));padding:10px 12px;border-radius:8px;border:1px dashed var(--line);">
+                    “${escapeAttr(u.q)}”
+                  </p>
+
+                  <div class="chat" style="margin-top:10px;padding:12px 14px;background:var(--card-sub, rgba(11,122,107,0.04));border-radius:8px;border-left:3px solid var(--pri);">
+                    <div style="font-size:12px;font-weight:700;color:var(--pri);margin-bottom:6px;display:flex;align-items:center;gap:5px;">
+                      <span>💬</span> <span>Tanggapan Resmi Pengurus RT</span>
+                    </div>
+                    ${st.m == "a" ? `
+                      <div style="display:flex;flex-direction:column;gap:8px;">
+                        <textarea id="resp_${uId}" placeholder="Tulis tanggapan atau keputusan musyawarah pengurus RT..." rows="2" style="width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--line);border-radius:6px;outline:none;background:var(--card);color:var(--ink);">${escapeAttr(u.r || "")}</textarea>
+                        <div style="align-self:flex-end;">
+                          <button class="btn sm" onclick="saveUsulanResponse('${uId}')">💾 Simpan Tanggapan</button>
+                        </div>
+                      </div>
+                    ` : `
+                      <div style="font-size:13px;line-height:1.5;color:var(--ink);">
+                        ${u.r ? escapeAttr(u.r) : '<em style="color:var(--mut);">Belum ada tanggapan resmi dari pengurus RT. Usulan Anda akan dibahas pada agenda rapat rutin pengurus.</em>'}
+                      </div>
+                    `}
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        ` : `
+          <div class="card" style="text-align:center;padding:48px 20px;color:var(--mut);">
+            <div style="font-size:40px;margin-bottom:12px;">💡</div>
+            <b style="font-size:16px;color:var(--ink);display:block;margin-bottom:6px;">Belum Ada Usulan Warga</b>
+            <p style="font-size:13.5px;max-width:440px;margin:0 auto 18px auto;line-height:1.5;">
+              Warga RT 01 / RW 02 dapat menyampaikan aspirasi, saran pengadaan, atau usulan kegiatan di sini agar tercatat secara transparan.
+            </p>
+            <button class="btn sm" onclick="openUsulModal()">${ICONS.plus} Sampaikan Usulan Pertama</button>
+          </div>
+        `}
+      `;
+    }
+
+    function kelola() {
+      const activeFolders = F;
+
+      return `
+        <div class="tabs">
+          <button class="on">${ICONS.list} Kegiatan & Pagu Anggaran</button>
+          <button onclick="openSpreadsheetModal()">${ICONS.plus} Input Cepat Spreadsheet</button>
+          <span class="sp"></span>
+          <button class="btn sm" onclick="openFolderModal()">+ Tambah Kegiatan Baru</button>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+            <div>
+              <h2 style="margin:0 0 6px 0;">Daftar Kegiatan RT & Pagu Anggaran</h2>
+              <p style="color:var(--mut);font-size:13px;margin:0;line-height:1.5;">
+                Semua kegiatan tersimpan di database MySQL phpMyAdmin. Pengurus dapat menambah kegiatan baru, mengatur penanggung jawab (PIC), dan menetapkan target pagu anggaran.
+              </p>
+            </div>
+            <button class="btn sm" onclick="openFolderModal()">
+              <svg class="i-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Tambah Kegiatan Baru
+            </button>
+          </div>
+
+          <div style="overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card);">
+            <table class="resp" style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr>
+                  <th style="width:40px;text-align:center;">#</th>
+                  <th style="min-width:200px;">Nama Kegiatan / Folder</th>
+                  <th style="width:160px;">Penanggung Jawab (PIC)</th>
+                  <th style="min-width:220px;">Realisasi / Pagu Anggaran</th>
+                  <th style="width:140px;text-align:center;">Data Berkas & Transaksi</th>
+                  <th style="width:130px;text-align:right;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${activeFolders.length > 0 ? activeFolders.map((f, idx) => {
+                  const outTrx = tout(T.filter(t => t.f == f.id));
+                  const pagu = f.pagu || 0;
+                  const p = pagu > 0 ? Math.min(100, Math.round(outTrx / pagu * 100)) : 0;
+                  const fCatCount = C.filter(c => c.f == f.id).length;
+                  const fTrxCount = T.filter(t => t.f == f.id).length;
+
+                  return `
+                    <tr>
+                      <td style="text-align:center;color:var(--mut);font-size:12px;font-weight:700;">${idx + 1}</td>
+                      <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                          <span style="font-size:18px;display:flex;align-items:center;color:var(--pri);">${ICONS[f.ic] || ICONS.folder}</span>
+                          <div>
+                            <b style="font-size:13.5px;color:var(--txt);">${escapeAttr(f.n)}</b>
+                            <div style="font-size:11px;color:var(--mut);">ID: <code>${escapeAttr(f.id)}</code></div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span style="font-size:12.5px;color:var(--txt);display:inline-flex;align-items:center;gap:4px;">
+                          👤 ${escapeAttr(f.pic || "—")}
+                        </span>
+                      </td>
+                      <td>
+                        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+                          <span><b>${R(outTrx)}</b> / ${pagu > 0 ? R(pagu) : '<span style="color:var(--mut)">Tidak dibatasi</span>'}</span>
+                          ${pagu > 0 ? `<b style="color:${p > 100 ? 'var(--out)' : 'var(--pri)'}">${p}%</b>` : ''}
+                        </div>
+                        <div class="track" style="height:6px;">
+                          <i style="width:${pagu > 0 ? p : 0}%;background:${p > 100 ? 'var(--out)' : 'var(--pri)'}"></i>
+                        </div>
+                      </td>
+                      <td style="text-align:center;font-size:12px;color:var(--mut);">
+                        <span class="badge" style="font-size:11px;">📄 ${fCatCount} berkas</span>
+                        <span class="badge" style="font-size:11px;margin-left:4px;">💳 ${fTrxCount} trx</span>
+                      </td>
+                      <td style="text-align:right;">
+                        <div style="display:inline-flex;gap:4px;">
+                          <button class="btn ghost sm" onclick="openFolderModal('${f.id}')" title="Ubah Nama, PIC, Pagu, atau Ikon" style="padding:4px 8px;font-size:11.5px;">
+                            ✏️ Edit
+                          </button>
+                          <button class="btn danger sm" onclick="deleteFolder('${f.id}')" title="Hapus Kegiatan" style="padding:4px 8px;font-size:11.5px;">
+                            🗑️
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  `;
+                }).join("") : `
+                  <tr>
+                    <td colspan="6" style="text-align:center;padding:24px 14px;color:var(--mut);font-size:13px;">
+                      Belum ada folder kegiatan. Klik "+ Tambah Kegiatan Baru" di atas.
+                    </td>
+                  </tr>
+                `}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function render(keep) {
+      document.getElementById("ttl").textContent = TT[st.v][0];
+      document.getElementById("sub").textContent = TT[st.v][1] + (st.m == "a" ? " • Mode Admin" : "");
+      document.querySelectorAll("#mode button").forEach(b => b.classList.toggle("on", b.dataset.m == st.m));
+      
+      nav();
+      expo();
+      document.getElementById("view").innerHTML = { home, kas, arsip, usul, kelola }[st.v]();
+
+      if (keep) {
+        const q = document.getElementById("q");
+        if (q) {
+          q.focus();
+          q.setSelectionRange(q.value.length, q.value.length);
+        }
+      }
+    }
+
+    document.getElementById("mode").onclick = e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const m = btn.dataset.m;
+      if (!m) return;
+
+      if (m == "a") {
+        if (!isAdminAuth()) {
+          openAuthModal();
+          return;
+        }
+        st.m = "a";
+      } else {
+        st.m = "w";
+        if (st.v == "kelola") st.v = "home";
+      }
+      render();
+    };
+
+    document.getElementById("exp").onclick = e => {
+      e.stopPropagation();
+      document.getElementById("drop").classList.toggle("show");
+    };
+
+    document.addEventListener("click", () => {
+      const drop = document.getElementById("drop");
+      if (drop) drop.classList.remove("show");
+    });
+
+    // ========================================================
+    // SPREADSHEET BATCH DATA ENTRY ENGINE
+    // ========================================================
+    let spRowsData = [];
+
+    function openSpreadsheetModal(targetFolderId = null, targetCatatanId = null) {
+      if (!isAdminAuth()) {
+        openAuthModal();
+        return;
+      }
+
+      const activeFolder = targetFolderId || (st.fold || F[0].id);
+      const sel = document.getElementById("spFolderSelect");
+      sel.innerHTML = F.map(f => `<option value="${f.id}" ${f.id === activeFolder ? "selected" : ""}>${f.n}</option>`).join("");
+
+      updateSpCatatanDropdown(activeFolder, targetCatatanId || st.cat);
+
+      // Set default date to today
+      const today = new Date().toISOString().split("T")[0];
+      document.getElementById("spDefaultDate").value = today;
+      document.getElementById("spDefaultType").value = "i";
+
+      // Initialize with 4 empty rows ready for input
+      spRowsData = [];
+      addSpRows(4);
+
+      document.getElementById("spreadsheetModal").classList.add("show");
+    }
+
+    function updateSpCatatanDropdown(folderId, selectedCatatanId = null) {
+      const cSel = document.getElementById("spCatatanSelect");
+      if (!cSel) return;
+      const list = C.filter(c => c.f == folderId);
+      let opts = `<option value="">-- Simpan ke Folder Utama (Tanpa Berkas) --</option>`;
+      opts += list.map(c => `<option value="${c.id}" ${c.id === selectedCatatanId ? "selected" : ""}>📄 ${escapeAttr(c.t)} (${c.p || D(c.d)})</option>`).join("");
+      cSel.innerHTML = opts;
+    }
+
+    function closeSpreadsheetModal() {
+      document.getElementById("spreadsheetModal").classList.remove("show");
+      document.getElementById("excelPasteBox").style.display = "none";
+    }
+
+    function addSpRows(count = 1) {
+      const defDate = document.getElementById("spDefaultDate").value || new Date().toISOString().split("T")[0];
+      const defType = document.getElementById("spDefaultType").value || "i";
+
+      for (let i = 0; i < count; i++) {
+        spRowsData.push({
+          date: defDate,
+          type: defType,
+          keterangan: "",
+          nominal: "",
+          sumber: ""
+        });
+      }
+      renderSpTable();
+    }
+
+    function renderSpTable() {
+      const tbody = document.getElementById("spTableBody");
+      tbody.innerHTML = spRowsData.map((row, idx) => `
+        <tr data-idx="${idx}">
+          <td style="text-align:center;color:var(--mut);font-weight:600;">${idx + 1}</td>
+          <td><input type="date" value="${row.date}" onchange="updateSpRow(${idx}, 'date', this.value)"></td>
+          <td>
+            <select onchange="updateSpRow(${idx}, 'type', this.value)">
+              <option value="i" ${row.type === 'i' ? 'selected' : ''}>Masuk</option>
+              <option value="o" ${row.type === 'o' ? 'selected' : ''}>Keluar</option>
+            </select>
+          </td>
+          <td>
+            <input type="text" placeholder="Contoh: Iuran kas warga..." value="${escapeAttr(row.keterangan)}" oninput="updateSpRow(${idx}, 'keterangan', this.value)" onkeydown="handleSpKeyDown(event, ${idx})">
+          </td>
+          <td>
+            <input type="number" placeholder="0" min="0" value="${row.nominal}" oninput="updateSpRow(${idx}, 'nominal', this.value)" style="text-align:right;">
+          </td>
+          <td>
+            <input type="text" placeholder="Nama warga / pihak..." value="${escapeAttr(row.sumber)}" oninput="updateSpRow(${idx}, 'sumber', this.value)" onkeydown="handleSpKeyDown(event, ${idx})">
+          </td>
+          <td style="text-align:center;">
+            <button type="button" onclick="removeSpRow(${idx})" style="border:0;background:none;color:var(--out);cursor:pointer;font-size:18px;font-weight:700;line-height:1;">&times;</button>
+          </td>
+        </tr>
+      `).join("");
+
+      calcSpTotals();
+    }
+
+    function updateSpRow(idx, field, value) {
+      if (spRowsData[idx]) {
+        spRowsData[idx][field] = value;
+        calcSpTotals();
+      }
+    }
+
+    function removeSpRow(idx) {
+      spRowsData.splice(idx, 1);
+      if (spRowsData.length === 0) {
+        addSpRows(1);
+      } else {
+        renderSpTable();
+      }
+    }
+
+    function clearEmptySpRows() {
+      spRowsData = spRowsData.filter(r => r.keterangan.trim() !== "" || Number(r.nominal) > 0);
+      if (spRowsData.length === 0) addSpRows(1);
+      renderSpTable();
+    }
+
+    function handleSpKeyDown(e, idx) {
+      // Pressing Enter on the last row automatically spawns a new row!
+      if (e.key === "Enter" && idx === spRowsData.length - 1) {
+        e.preventDefault();
+        addSpRows(1);
+        setTimeout(() => {
+          const rows = document.querySelectorAll("#spTableBody tr");
+          if (rows.length) {
+            const inputs = rows[rows.length - 1].querySelectorAll("input[type='text']");
+            if (inputs.length) inputs[0].focus();
+          }
+        }, 30);
+      }
+    }
+
+    function calcSpTotals() {
+      let masuk = 0;
+      let keluar = 0;
+      let filledCount = 0;
+
+      for (const r of spRowsData) {
+        const nom = Math.abs(Number(r.nominal) || 0);
+        if (r.keterangan.trim() !== "" || nom > 0) {
+          filledCount++;
+          if (r.type === "i") masuk += nom;
+          else keluar += nom;
+        }
+      }
+
+      document.getElementById("spCount").textContent = `${filledCount} baris terisi`;
+      document.getElementById("spTotalMasuk").textContent = R(masuk);
+      document.getElementById("spTotalKeluar").textContent = R(keluar);
+      document.getElementById("btnSaveBatch").textContent = `💾 Simpan (${filledCount}) Transaksi`;
+    }
+
+    function applyDefaultDateToRows(newDate) {
+      for (const r of spRowsData) {
+        r.date = newDate;
+      }
+      renderSpTable();
+    }
+
+    function applyDefaultTypeToRows(newType) {
+      for (const r of spRowsData) {
+        r.type = newType;
+      }
+      renderSpTable();
+    }
+
+    function toggleExcelPasteBox() {
+      const box = document.getElementById("excelPasteBox");
+      box.style.display = box.style.display === "none" ? "block" : "none";
+      if (box.style.display === "block") {
+        document.getElementById("excelPasteArea").focus();
+      }
+    }
+
+    function parseAndAppendExcelPaste() {
+      const text = document.getElementById("excelPasteArea").value.trim();
+      if (!text) return;
+
+      const lines = text.split(/\r?\n/);
+      const defDate = document.getElementById("spDefaultDate").value || new Date().toISOString().split("T")[0];
+      const defType = document.getElementById("spDefaultType").value || "i";
+
+      let added = 0;
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        const parts = line.split(/\t|,/);
+        if (parts.length >= 2) {
+          let date = defDate;
+          let keterangan = "";
+          let nominal = 0;
+          let sumber = "";
+
+          if (parts[0].match(/^\d{4}-\d{2}-\d{2}$/)) {
+            date = parts[0].trim();
+            keterangan = parts[1] ? parts[1].trim() : "";
+            nominal = parts[2] ? parts[2].replace(/[^0-9]/g, "") : "";
+            sumber = parts[3] ? parts[3].trim() : "";
+          } else {
+            keterangan = parts[0].trim();
+            nominal = parts[1] ? parts[1].replace(/[^0-9]/g, "") : "";
+            sumber = parts[2] ? parts[2].trim() : "";
+          }
+
+          if (keterangan || nominal) {
+            spRowsData.push({
+              date: date,
+              type: defType,
+              keterangan: keterangan,
+              nominal: nominal,
+              sumber: sumber
+            });
+            added++;
+          }
+        }
+      }
+
+      document.getElementById("excelPasteArea").value = "";
+      document.getElementById("excelPasteBox").style.display = "none";
+      renderSpTable();
+      toast(`Berhasil memasukkan ${added} baris dari Excel`);
+    }
+
+    function saveSpreadsheetBatch() {
+      const folderId = document.getElementById("spFolderSelect").value;
+      const catatanId = document.getElementById("spCatatanSelect").value || folderId;
+      const f = fn(folderId);
+
+      const validRows = spRowsData.filter(r => r.keterangan.trim() !== "" || Number(r.nominal) > 0);
+      if (validRows.length === 0) {
+        alert("Tidak ada baris transaksi yang terisi untuk disimpan.");
+        return;
+      }
+
+      for (const r of validRows) {
+        const nom = Math.abs(Number(r.nominal) || 0);
+        T.unshift({
+          id: "t_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
+          d: r.date,
+          t: r.type,
+          f: folderId,
+          c: catatanId,
+          k: r.keterangan.trim() || ("Transaksi " + f.n),
+          n: nom,
+          s: r.sumber.trim() || f.pic
+        });
+      }
+
+      saveKas();
+      closeSpreadsheetModal();
+      const targetLabel = catatanId !== folderId ? cn(catatanId).t : f.n;
+      toast(`Sukses menyimpan ${validRows.length} transaksi ke: ${targetLabel}`);
+      render();
+    }
+
+    // Modal Buat Berkas Rekap Baru
+    function openNewRekapModal(folderId = null) {
+      if (!isAdminAuth()) {
+        openAuthModal();
+        return;
+      }
+      const sel = document.getElementById("nrFolder");
+      const activeFolder = folderId || (st.fold || F[0].id);
+      sel.innerHTML = F.map(f => `<option value="${f.id}" ${f.id === activeFolder ? "selected" : ""}>${f.n}</option>`).join("");
+      
+      const now = new Date();
+      const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+      const curMonth = monthNames[now.getMonth()];
+      const curYear = now.getFullYear();
+
+      document.getElementById("nrTitle").value = `Rekap Kas ${curMonth} ${curYear}`;
+      document.getElementById("nrPeriod").value = `01/${String(now.getMonth()+1).padStart(2,'0')}/${curYear} - ${new Date(curYear, now.getMonth()+1, 0).getDate()}/${String(now.getMonth()+1).padStart(2,'0')}/${curYear}`;
+      document.getElementById("nrStatus").value = "Draf";
+      document.getElementById("nrDesc").value = "";
+
+      document.getElementById("newRekapModal").classList.add("show");
+    }
+
+    function closeNewRekapModal() {
+      document.getElementById("newRekapModal").classList.remove("show");
+    }
+
+    function handleNewRekapSubmit(e) {
+      e.preventDefault();
+      const folderId = document.getElementById("nrFolder").value;
+      const title = document.getElementById("nrTitle").value.trim();
+      const period = document.getElementById("nrPeriod").value.trim();
+      const status = document.getElementById("nrStatus").value;
+      const desc = document.getElementById("nrDesc").value.trim();
+      const dateStr = new Date().toISOString().split("T")[0];
+
+      const newId = "c_" + folderId + "_" + Date.now();
+      C.unshift({
+        id: newId,
+        f: folderId,
+        t: title,
+        p: period,
+        d: dateStr,
+        s: status,
+        desc: desc
+      });
+
+      saveCatatan();
+      closeNewRekapModal();
+      toast(`Berkas rekap "${title}" berhasil dibuat`);
+      st.fold = folderId;
+      st.cat = newId;
+      render();
+    }
+
+    // Modal & Manajemen Folder Kegiatan (Disimpan di database MySQL phpMyAdmin)
+    function openFolderModal(folderId = null) {
+      if (!isAdminAuth()) {
+        openAuthModal();
+        return;
+      }
+      const titleText = document.getElementById("folderModalTitleText");
+      const fId = document.getElementById("fId");
+      const fNama = document.getElementById("fNama");
+      const fPic = document.getElementById("fPic");
+      const fPagu = document.getElementById("fPagu");
+      const fIcon = document.getElementById("fIcon");
+
+      if (folderId) {
+        const item = F.find(f => f.id === folderId);
+        if (item) {
+          titleText.textContent = "Edit Folder Kegiatan: " + item.n;
+          fId.value = item.id;
+          fNama.value = item.n;
+          fPic.value = item.pic || "";
+          fPagu.value = item.pagu || 0;
+          fIcon.value = item.ic || "folder";
+        }
+      } else {
+        titleText.textContent = "Tambah Kegiatan Baru";
+        fId.value = "";
+        fNama.value = "";
+        fPic.value = "";
+        fPagu.value = 0;
+        fIcon.value = "folder";
+      }
+
+      document.getElementById("folderModal").classList.add("show");
+      fNama.focus();
+    }
+
+    function closeFolderModal() {
+      const m = document.getElementById("folderModal");
+      if (m) m.classList.remove("show");
+    }
+
+    async function handleFolderSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById("fId").value.trim();
+      const nama = document.getElementById("fNama").value.trim();
+      const pic = document.getElementById("fPic").value.trim();
+      const pagu = Math.max(0, parseInt(document.getElementById("fPagu").value, 10) || 0);
+      const icon = document.getElementById("fIcon").value;
+
+      if (!nama) {
+        alert("Nama kegiatan wajib diisi.");
+        return;
+      }
+
+      const btn = document.getElementById("btnSaveFolder");
+      btn.disabled = true;
+      btn.textContent = "Menyimpan...";
+
+      try {
+        const res = await api("folder_save", { id, nama, pic, pagu, icon });
+        await loadAll();
+        closeFolderModal();
+        toast(res.action === "created" ? `Kegiatan "${nama}" berhasil ditambahkan ke database` : `Perubahan kegiatan "${nama}" berhasil disimpan`);
+        render();
+      } catch (err) {
+        alert("Gagal menyimpan folder kegiatan: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "💾 Simpan Kegiatan";
+      }
+    }
+
+    async function deleteFolder(folderId) {
+      if (!isAdminAuth()) {
+        openAuthModal();
+        return;
+      }
+      const item = F.find(f => f.id === folderId);
+      if (!item) return;
+
+      const trxCount = T.filter(t => t.f === folderId).length;
+      const catCount = C.filter(c => c.f === folderId).length;
+      if (trxCount > 0 || catCount > 0) {
+        alert(`Folder "${item.n}" tidak dapat dihapus karena masih digunakan oleh ${catCount} berkas rekap dan ${trxCount} transaksi kas.\n\nPindahkan atau hapus berkas dan transaksi di dalamnya terlebih dahulu demi integritas buku kas.`);
+        return;
+      }
+
+      if (!confirm(`Hapus folder kegiatan "${item.n}" dari database? Tindakan ini tidak dapat dibatalkan.`)) {
+        return;
+      }
+
+      try {
+        await api("folder_delete", { id: folderId });
+        await loadAll();
+        if (st.fold === folderId) {
+          st.fold = null;
+          st.cat = null;
+        }
+        toast(`Folder kegiatan "${item.n}" berhasil dihapus`);
+        render();
+      } catch (err) {
+        alert("Gagal menghapus folder kegiatan: " + err.message);
+      }
+    }
+
+    // Modal Usulan Warga Handlers
+    function openUsulModal() {
+      const m = document.getElementById("usulModal");
+      if (m) {
+        document.getElementById("usulJudul").value = "";
+        document.getElementById("usulNama").value = "";
+        document.getElementById("usulRincian").value = "";
+        m.classList.add("show");
+      }
+    }
+
+    function closeUsulModal() {
+      const m = document.getElementById("usulModal");
+      if (m) m.classList.remove("show");
+    }
+
+    async function submitUsulan(e) {
+      e.preventDefault();
+      const judul = (document.getElementById("usulJudul").value || "").trim();
+      const nama = (document.getElementById("usulNama").value || "").trim();
+      const rincian = (document.getElementById("usulRincian").value || "").trim();
+
+      if (!judul || !nama || !rincian) {
+        alert("Mohon lengkapi semua kolom usulan.");
+        return;
+      }
+
+      try {
+        const res = await api("usulan_add", { judul, nama, rincian });
+        U.unshift(res.item);
+      } catch (err) {
+        alert("Gagal mengirim usulan: " + err.message);
+        return;
+      }
+      closeUsulModal();
+      toast("Usulan berhasil dikirim! Pengurus akan meninjau.");
+      go("usul");
+    }
+
+    function updateUsulanStatus(id, newStatus) {
+      const u = U.find(item => item.id == id);
+      if (u) {
+        u.st = newStatus;
+        api("usulan_update", { id, status: newStatus }).catch(e => alert("Gagal menyimpan: " + e.message));
+        toast(`Status usulan diubah: ${newStatus}`);
+        render();
+      }
+    }
+
+    function saveUsulanResponse(id) {
+      const inp = document.getElementById(`resp_${id}`);
+      const u = U.find(item => item.id == id);
+      if (u && inp) {
+        u.r = inp.value.trim();
+        api("usulan_update", { id, tanggapan: u.r }).catch(e => alert("Gagal menyimpan: " + e.message));
+        toast("Tanggapan pengurus berhasil disimpan!");
+        render();
+      }
+    }
+
+    function deleteUsulan(id) {
+      if (!confirm("Apakah Anda yakin ingin menghapus usulan ini?")) return;
+      U = U.filter(item => item.id != id);
+      api("usulan_delete", { id }).catch(e => alert("Gagal menghapus: " + e.message));
+      toast("Usulan berhasil dihapus");
+      render();
+    }
+
+    function toggleCatatanStatus(catatanId) {
+      const c = C.find(x => x.id == catatanId);
+      if (!c) return;
+      c.s = c.s === "Final" ? "Draf" : "Final";
+      saveCatatan();
+      toast(`Status berkas rekap diubah menjadi: ${c.s}`);
+      render();
+    }
+
+    function deleteCatatan(catatanId) {
+      if (!confirm("Hapus berkas rekap ini beserta transaksinya?")) return;
+      C = C.filter(x => x.id != catatanId);
+      for (let i = T.length - 1; i >= 0; i--) if (T[i].c == catatanId) T.splice(i, 1);
+      saveCatatan();
+      st.cat = null;
+      toast("Berkas rekap dihapus");
+      render();
+    }
+
+    // Helper: Unduh Workbook Excel dengan Ekstensi .xlsx & MIME Valid (Cegah nama UUID dan cegah pembukaan viewer paksa)
+    function saveXLSXWorkbook(wb, filename) {
+      if (!filename.toLowerCase().endsWith(".xlsx")) {
+        filename += ".xlsx";
+      }
+      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      const blob = new Blob([wbout], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"
+      });
+
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob, filename);
+        return;
+      }
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = url;
+      a.setAttribute("download", filename);
+      a.download = filename;
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+
+      setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 2000);
+    }
+
+    // Ekspor Spesifik Berkas Rekap Periode ke Excel (.xlsx)
+    function exportCatatanXLSX(catatanId) {
+      if (typeof XLSX === "undefined") {
+        alert("Modul Excel (SheetJS) belum termuat.");
+        return;
+      }
+      const c = cn(catatanId);
+      const f = fn(c.f);
+      const txs = T.filter(t => t.c == catatanId || (t.f == c.f && t.c == catatanId));
+      const totalMasuk = tin(txs);
+      const totalKeluar = tout(txs);
+      const saldo = sum(txs);
+      const dateStr = new Date().toISOString().split("T")[0];
+
+      const wb = XLSX.utils.book_new();
+
+      const wsData = [
+        ["LAPORAN BERKAS REKAP KAS RT 01 / RW 02 DESA SLADI"],
+        [`Kegiatan / Folder: ${f.n}`],
+        [`Judul Berkas: ${c.t}`],
+        [`Periode: ${c.p || D(c.d)}   |   Status: ${c.s}`],
+        [`Penanggung Jawab (PIC): ${f.pic}`],
+        [`Tanggal Unduh: ${D(dateStr)}`],
+        [`Total Masuk: ${R(totalMasuk)}   |   Total Keluar: ${R(totalKeluar)}   |   Saldo: ${R(saldo)}`],
+        [],
+        ["No", "Tanggal", "Jenis", "Keterangan Transaksi", "Nominal (Rp)", "Pihak / Warga / Sumber"]
+      ];
+
+      txs.forEach((t, i) => {
+        wsData.push([
+          i + 1,
+          t.d,
+          t.t === "i" ? "Masuk" : "Keluar",
+          t.k,
+          t.n,
+          t.s || "-"
+        ]);
+      });
+
+      wsData.push([]);
+      wsData.push(["", "", "", "TOTAL UANG MASUK", totalMasuk, ""]);
+      wsData.push(["", "", "", "TOTAL UANG KELUAR", totalKeluar, ""]);
+      wsData.push(["", "", "", "SALDO BERKAS REKAP", saldo, ""]);
+
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      ws["!cols"] = [
+        { wch: 6 },
+        { wch: 14 },
+        { wch: 12 },
+        { wch: 38 },
+        { wch: 18 },
+        { wch: 24 }
+      ];
+
+      XLSX.utils.book_append_sheet(wb, ws, "Rekap Kas");
+      const cleanName = (c.t || f.n).replace(/[^a-zA-Z0-9_\-]/g, "_");
+      saveXLSXWorkbook(wb, `Rekap_${cleanName}_${dateStr}.xlsx`);
+      markAsDownloaded(catatanId);
+      toast(`Berkas rekap ${c.t} (.xlsx) berhasil diunduh`);
+      render();
+    }
+
+    // ==========================================
+    // MODUL EKSPOR & IMPOR DATA (.XLSX) PER KEGIATAN
+    // ==========================================
+
+    let importTargetFolderId = null;
+    let importTargetCatatanId = null;
+    let parsedXlsxRows = [];
+
+    // Helper: Parse Date from Excel (supports serial number, JS Date, ISO, or DD/MM/YYYY)
+    function parseExcelDate(val) {
+      if (!val) return new Date().toISOString().split("T")[0];
+      if (val instanceof Date && !isNaN(val)) {
+        return val.toISOString().split("T")[0];
+      }
+      if (typeof val === "number") {
+        // Excel serial date to JS Date
+        const date_info = new Date(Math.round((val - 25569) * 86400 * 1000));
+        return !isNaN(date_info.getTime()) ? date_info.toISOString().split("T")[0] : new Date().toISOString().split("T")[0];
+      }
+      const s = String(val).trim();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+      const m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+      if (m) {
+        return `${m[3]}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}`;
+      }
+      const d = new Date(s);
+      if (!isNaN(d.getTime())) return d.toISOString().split("T")[0];
+      return new Date().toISOString().split("T")[0];
+    }
+
+    // Helper: Parse Nominal from Excel (numbers or currency strings)
+    function parseExcelNominal(val) {
+      if (typeof val === "number") return Math.abs(val);
+      if (!val) return 0;
+      const s = String(val).trim();
+      const clean = s.replace(/[^0-9]/g, "");
+      return Number(clean) || 0;
+    }
+
+    // Ekspor Data Laporan per Kegiatan ke Berkas .xlsx
+    function exportFolderXLSX(folderId) {
+      if (typeof XLSX === "undefined") {
+        alert("Modul Excel (SheetJS) belum termuat. Periksa koneksi internet Anda.");
+        return;
+      }
+
+      const f = fn(folderId);
+      const txs = T.filter(t => t.f == folderId);
+      const totalMasuk = tin(txs);
+      const totalKeluar = tout(txs);
+      const saldo = sum(txs);
+      const dateStr = new Date().toISOString().split("T")[0];
+
+      const wb = XLSX.utils.book_new();
+
+      const wsData = [
+        ["LAPORAN KAS RT 01 / RW 02 DESA SLADI"],
+        [`Nama Kegiatan / Folder: ${f.n}`],
+        [`Penanggung Jawab (PIC): ${f.pic}`],
+        [`Pagu Anggaran: ${R(f.pagu || 0)}`],
+        [`Tanggal Ekspor: ${D(dateStr)}`],
+        [`Total Masuk: ${R(totalMasuk)}   |   Total Keluar: ${R(totalKeluar)}   |   Saldo: ${R(saldo)}`],
+        [],
+        ["No", "Tanggal", "Jenis", "Keterangan Transaksi", "Nominal (Rp)", "Pihak / Warga / Sumber"]
+      ];
+
+      txs.forEach((t, i) => {
+        wsData.push([
+          i + 1,
+          t.d,
+          t.t === "i" ? "Masuk" : "Keluar",
+          t.k,
+          t.n,
+          t.s || "-"
+        ]);
+      });
+
+      wsData.push([]);
+      wsData.push(["", "", "", "TOTAL UANG MASUK", totalMasuk, ""]);
+      wsData.push(["", "", "", "TOTAL UANG KELUAR", totalKeluar, ""]);
+      wsData.push(["", "", "", "SALDO KEGIATAN", saldo, ""]);
+
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+      ws["!cols"] = [
+        { wch: 6 },
+        { wch: 14 },
+        { wch: 12 },
+        { wch: 38 },
+        { wch: 18 },
+        { wch: 24 }
+      ];
+
+      XLSX.utils.book_append_sheet(wb, ws, "Laporan Kas");
+
+      const cleanName = f.n.replace(/[^a-zA-Z0-9_\-]/g, "_");
+      saveXLSXWorkbook(wb, `Laporan_${cleanName}_${dateStr}.xlsx`);
+      toast(`Laporan ${f.n} (.xlsx) berhasil diunduh`);
+    }
+
+    // Unduh Template Excel Kosong (.xlsx) khusus kegiatan - Bersih Tanpa Data Dummy
+    function downloadFolderXLSXTemplate(folderId) {
+      if (typeof XLSX === "undefined") {
+        alert("Modul Excel (SheetJS) belum termuat.");
+        return;
+      }
+      const f = fn(folderId || "ops");
+      const wb = XLSX.utils.book_new();
+
+      // Struktur kolom template kosong siap diisi
+      const wsData = [
+        ["Tanggal", "Jenis", "Keterangan Transaksi", "Nominal", "Pihak / Warga / Sumber"],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        [],
+        ["# PETUNJUK PENGISIAN:", "", "", "", ""],
+        ["# 1. Kolom Tanggal: format YYYY-MM-DD atau DD/MM/YYYY (contoh: 2026-10-05)", "", "", "", ""],
+        ["# 2. Kolom Jenis: isi 'Masuk' atau 'Keluar'", "", "", "", ""],
+        ["# 3. Kolom Nominal: isi angka tanpa tanda titik atau koma (contoh: 50000)", "", "", "", ""]
+      ];
+
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      ws["!cols"] = [
+        { wch: 14 },
+        { wch: 12 },
+        { wch: 38 },
+        { wch: 16 },
+        { wch: 25 }
+      ];
+
+      XLSX.utils.book_append_sheet(wb, ws, "Template Import");
+      const cleanName = f.n.replace(/[^a-zA-Z0-9_\-]/g, "_");
+      saveXLSXWorkbook(wb, `Template_Import_${cleanName}.xlsx`);
+      toast(`Template Excel (.xlsx) untuk ${f.n} berhasil diunduh`);
+    }
+
+    // Buka Modal Impor XLSX
+    function openImportXlsxModal(folderId, catatanId = null) {
+      if (!isAdminAuth()) {
+        openAuthModal();
+        return;
+      }
+      importTargetFolderId = folderId;
+      importTargetCatatanId = catatanId || null;
+      const f = fn(folderId);
+      const c = catatanId ? cn(catatanId) : null;
+      parsedXlsxRows = [];
+
+      document.getElementById("importTargetFolderName").textContent = c 
+        ? `${f.n} ➔ Berkas: ${c.t}`
+        : `${f.n} (PIC: ${f.pic})`;
+      document.getElementById("xlsxFileInput").value = "";
+      document.getElementById("xlsxUploadLabel").textContent = "Klik untuk memilih file Excel (.xlsx) atau seret ke sini";
+      document.getElementById("importPreviewContainer").style.display = "none";
+      document.getElementById("importXlsxError").style.display = "none";
+      document.getElementById("btnConfirmImportXlsx").disabled = true;
+      document.getElementById("btnConfirmImportXlsx").textContent = "💾 Simpan Transaksi ke Kegiatan";
+
+      const m = document.getElementById("importXlsxModal");
+      if (m) m.classList.add("show");
+    }
+
+    // Tutup Modal Impor XLSX
+    function closeImportXlsxModal() {
+      const m = document.getElementById("importXlsxModal");
+      if (m) m.classList.remove("show");
+      parsedXlsxRows = [];
+    }
+
+    function handleXlsxFileSelected(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      processXlsxFile(file);
+    }
+
+    function handleXlsxFileDrop(e) {
+      e.preventDefault();
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (!file) return;
+      processXlsxFile(file);
+    }
+
+    function processXlsxFile(file) {
+      if (typeof XLSX === "undefined") {
+        showImportError("Modul Excel (SheetJS) belum termuat.");
+        return;
+      }
+      document.getElementById("xlsxUploadLabel").textContent = `Berkas dipilih: ${file.name}`;
+      document.getElementById("importXlsxError").style.display = "none";
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const data = new Uint8Array(evt.target.result);
+          const wb = XLSX.read(data, { type: "array", cellDates: true });
+          const firstSheetName = wb.SheetNames[0];
+          if (!firstSheetName) throw new Error("File Excel tidak memiliki lembar kerja (sheet).");
+
+          const ws = wb.Sheets[firstSheetName];
+          const rawRows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: "" });
+
+          if (!rawRows || rawRows.length === 0) {
+            throw new Error("Lembar kerja Excel kosong.");
+          }
+
+          parsedXlsxRows = parseXlsxRows(rawRows);
+
+          if (parsedXlsxRows.length === 0) {
+            throw new Error("Tidak ditemukan baris transaksi yang valid. Pastikan terdapat kolom Tanggal, Jenis, Keterangan, dan Nominal.");
+          }
+
+          renderImportPreview();
+        } catch (err) {
+          showImportError("Gagal membaca file Excel: " + err.message);
+        }
+      };
+      reader.onerror = function() {
+        showImportError("Gagal membaca file dari komputer Anda.");
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function parseXlsxRows(rawRows) {
+      let headerIdx = -1;
+      let colMap = { date: -1, type: -1, ket: -1, nom: -1, src: -1 };
+
+      for (let r = 0; r < Math.min(15, rawRows.length); r++) {
+        const row = rawRows[r];
+        if (!Array.isArray(row)) continue;
+
+        row.forEach((cell, c) => {
+          const str = String(cell || "").toLowerCase().trim();
+          if (str.includes("tanggal") || str === "tgl" || str === "date") colMap.date = c;
+          else if (str.includes("jenis") || str.includes("tipe") || str === "type" || str === "arus") colMap.type = c;
+          else if (str.includes("keterangan") || str.includes("uraian") || str.includes("deskripsi")) colMap.ket = c;
+          else if (str.includes("nominal") || str.includes("jumlah") || str.includes("nilai") || str.includes("rp") || str === "amount") colMap.nom = c;
+          else if (str.includes("pihak") || str.includes("warga") || str.includes("sumber") || str.includes("nama") || str === "pic") colMap.src = c;
+        });
+
+        if (colMap.ket !== -1 && colMap.nom !== -1) {
+          headerIdx = r;
+          break;
+        }
+      }
+
+      if (headerIdx === -1) {
+        headerIdx = 0;
+        colMap = { date: 0, type: 1, ket: 2, nom: 3, src: 4 };
+      }
+
+      const result = [];
+      for (let r = headerIdx + 1; r < rawRows.length; r++) {
+        const row = rawRows[r];
+        if (!row || row.length === 0) continue;
+
+        const firstCell = String(row[0] || "").trim();
+        if (firstCell.startsWith("#") || firstCell.toLowerCase().includes("total") || firstCell.toLowerCase().includes("petunjuk")) {
+          continue;
+        }
+
+        const rawDate = colMap.date !== -1 ? row[colMap.date] : "";
+        const rawType = colMap.type !== -1 ? row[colMap.type] : "";
+        const rawKet = colMap.ket !== -1 ? row[colMap.ket] : "";
+        const rawNom = colMap.nom !== -1 ? row[colMap.nom] : "";
+        const rawSrc = colMap.src !== -1 ? row[colMap.src] : "";
+
+        const ket = String(rawKet || "").trim();
+        const nom = parseExcelNominal(rawNom);
+        const date = parseExcelDate(rawDate);
+        const typeStr = String(rawType || "").toLowerCase().trim();
+        const type = (typeStr.includes("keluar") || typeStr.includes("pengeluaran") || typeStr === "o" || typeStr === "out" || typeStr === "debit") ? "o" : "i";
+        const src = String(rawSrc || "").trim();
+
+        if (ket || nom > 0) {
+          result.push({
+            date: date,
+            type: type,
+            keterangan: ket || "Transaksi Kegiatan",
+            nominal: nom,
+            sumber: src
+          });
+        }
+      }
+
+      return result;
+    }
+
+    function renderImportPreview() {
+      const container = document.getElementById("importPreviewContainer");
+      const tbody = document.getElementById("impPrevBody");
+      const countEl = document.getElementById("impPrevCount");
+      const masukEl = document.getElementById("impPrevMasuk");
+      const keluarEl = document.getElementById("impPrevKeluar");
+      const btn = document.getElementById("btnConfirmImportXlsx");
+
+      let masuk = 0;
+      let keluar = 0;
+      parsedXlsxRows.forEach(r => {
+        if (r.type === "i") masuk += r.nominal;
+        else keluar += r.nominal;
+      });
+
+      countEl.textContent = `${parsedXlsxRows.length} baris`;
+      masukEl.textContent = R(masuk);
+      keluarEl.textContent = R(keluar);
+
+      tbody.innerHTML = parsedXlsxRows.slice(0, 100).map((r, i) => `
+        <tr style="border-bottom:1px solid var(--line);">
+          <td style="padding:6px 8px;text-align:center;color:var(--mut);">${i + 1}</td>
+          <td style="padding:6px 8px;">${r.date}</td>
+          <td style="padding:6px 8px;">
+            <span class="badge ${r.type === 'i' ? 'b-in' : 'b-out'}" style="font-size:11px;padding:1px 6px;">
+              ${r.type === 'i' ? 'Masuk' : 'Keluar'}
+            </span>
+          </td>
+          <td style="padding:6px 8px;font-weight:500;">${escapeAttr(r.keterangan)}</td>
+          <td style="padding:6px 8px;text-align:right;font-weight:600;" class="${r.type === 'i' ? 'in' : 'out'}">
+            ${R(r.nominal)}
+          </td>
+          <td style="padding:6px 8px;color:var(--mut);">${escapeAttr(r.sumber) || '-'}</td>
+        </tr>
+      `).join("");
+
+      if (parsedXlsxRows.length > 100) {
+        tbody.innerHTML += `<tr><td colspan="6" style="padding:8px;text-align:center;color:var(--mut);font-style:italic;">... dan ${parsedXlsxRows.length - 100} baris lainnya</td></tr>`;
+      }
+
+      container.style.display = "block";
+      btn.disabled = false;
+      const f = fn(importTargetFolderId);
+      btn.textContent = `💾 Simpan (${parsedXlsxRows.length}) Transaksi ke ${f.n}`;
+    }
+
+    function showImportError(msg) {
+      const err = document.getElementById("importXlsxError");
+      err.textContent = msg;
+      err.style.display = "block";
+    }
+
+    function confirmImportXlsx() {
+      if (!importTargetFolderId || parsedXlsxRows.length === 0) return;
+      const f = fn(importTargetFolderId);
+      const targetCatId = importTargetCatatanId || importTargetFolderId;
+
+      for (const r of parsedXlsxRows) {
+        T.unshift({
+          id: "t_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
+          d: r.date,
+          t: r.type,
+          f: importTargetFolderId,
+          c: targetCatId,
+          k: r.keterangan,
+          n: r.nominal,
+          s: r.sumber || f.pic
+        });
+      }
+
+      saveKas();
+      closeImportXlsxModal();
+      const targetLabel = importTargetCatatanId ? cn(importTargetCatatanId).t : f.n;
+      toast(`Sukses mengimpor ${parsedXlsxRows.length} transaksi ke: ${targetLabel}`);
+      render();
+    }
+
+    // Ekspor Rekap Semua Kegiatan ke XLSX
+    function exportAllRekapXLSX(mode = "rekap") {
+      if (typeof XLSX === "undefined") {
+        alert("Modul Excel (SheetJS) belum termuat.");
+        return;
+      }
+      const wb = XLSX.utils.book_new();
+      const dateStr = new Date().toISOString().split("T")[0];
+      // mode: "rekap" (default) = ringkasan per kegiatan, "kas" = daftar semua transaksi
+
+      // Sheet 1: Rekap
+      const summaryData = [
+        ["REKAPITULASI KEUANGAN PER KEGIATAN RT 01 / RW 02 DESA SLADI"],
+        [`Tanggal Unduh: ${D(dateStr)}`],
+        [],
+        ["Kode", "Nama Kegiatan / Folder", "Penanggung Jawab (PIC)", "Pagu Anggaran (Rp)", "Total Masuk (Rp)", "Total Keluar (Rp)", "Saldo (Rp)", "Realisasi (%)"]
+      ];
+
+      F.forEach(f => {
+        const a = T.filter(t => t.f == f.id);
+        const masuk = tin(a);
+        const keluar = tout(a);
+        const sld = sum(a);
+        const persen = f.pagu ? Math.round((keluar / f.pagu) * 100) : 0;
+        summaryData.push([
+          f.id,
+          f.n,
+          f.pic,
+          f.pagu || 0,
+          masuk,
+          keluar,
+          sld,
+          `${persen}%`
+        ]);
+      });
+
+      const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
+      wsSummary["!cols"] = [
+        { wch: 8 },
+        { wch: 28 },
+        { wch: 22 },
+        { wch: 18 },
+        { wch: 18 },
+        { wch: 18 },
+        { wch: 18 },
+        { wch: 14 }
+      ];
+      if (mode !== "kas") XLSX.utils.book_append_sheet(wb, wsSummary, "Rekap Kegiatan");
+
+      // Sheet 2: Semua Transaksi
+      const allTxData = [
+        ["DAFTAR SEMUA TRANSAKSI KAS RT 01 / RW 02"],
+        [`Tanggal Unduh: ${D(dateStr)}`],
+        [],
+        ["No", "Tanggal", "Jenis", "Kegiatan / Folder", "Keterangan", "Nominal (Rp)", "Pihak / Warga"]
+      ];
+
+      T.forEach((t, i) => {
+        allTxData.push([
+          i + 1,
+          t.d,
+          t.t === "i" ? "Masuk" : "Keluar",
+          fn(t.f).n,
+          t.k,
+          t.n,
+          t.s || "-"
+        ]);
+      });
+
+      const wsAllTx = XLSX.utils.aoa_to_sheet(allTxData);
+      wsAllTx["!cols"] = [
+        { wch: 6 },
+        { wch: 14 },
+        { wch: 12 },
+        { wch: 24 },
+        { wch: 38 },
+        { wch: 18 },
+        { wch: 22 }
+      ];
+      if (mode !== "rekap") XLSX.utils.book_append_sheet(wb, wsAllTx, "Buku Kas");
+
+      if (mode === "kas") {
+        saveXLSXWorkbook(wb, `Buku_Kas_RT01_RW02_${dateStr}.xlsx`);
+        toast("Seluruh Buku Kas (.xlsx) berhasil diunduh");
+      } else {
+        saveXLSXWorkbook(wb, `Rekap_Semua_Kegiatan_RT01_RW02_${dateStr}.xlsx`);
+        toast("Rekap Semua Kegiatan (.xlsx) berhasil diunduh");
+      }
+    }
+
+    function exportAllTransactionsXLSX() {
+      exportAllRekapXLSX("kas");
+    }
+
+    // Pengatur Tema Warna Background (Teduh Nyaman di Mata vs Hijau Segar #72e4a7)
+    function initBgTheme() {
+      const saved = localStorage.getItem("kas_rt_bg_theme") || "soft";
+      applyBgTheme(saved);
+    }
+
+    function toggleBgTheme() {
+      const cur = document.documentElement.getAttribute("data-bg") === "vivid" ? "vivid" : "soft";
+      const next = cur === "soft" ? "vivid" : "soft";
+      applyBgTheme(next);
+      localStorage.setItem("kas_rt_bg_theme", next);
+      toast(next === "vivid" ? "Tema Hijau Segar (#72e4a7) diaktifkan" : "Tema Teduh & Nyaman di Mata diaktifkan");
+    }
+
+    function applyBgTheme(theme) {
+      const icon = document.getElementById("themeToggleIcon");
+      const label = document.getElementById("themeToggleLabel");
+      if (theme === "vivid") {
+        document.documentElement.setAttribute("data-bg", "vivid");
+        if (icon) icon.textContent = "✨";
+        if (label) label.textContent = "Tema";
+        const tb = document.getElementById("themeToggleBtn");
+        if (tb) tb.title = "Tema aktif: Hijau Segar (#72e4a7). Klik untuk ganti ke Teduh.";
+      } else {
+        document.documentElement.removeAttribute("data-bg");
+        if (icon) icon.textContent = "🌿";
+        if (label) label.textContent = "Tema";
+        const tb = document.getElementById("themeToggleBtn");
+        if (tb) tb.title = "Tema aktif: Teduh. Klik untuk ganti ke Hijau Segar (#72e4a7).";
+      }
+    }
+
+    initBgTheme();
+    loadAll().finally(() => render());
+  </script>
+</body>
+</html>
